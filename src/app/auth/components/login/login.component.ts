@@ -2,14 +2,7 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/auth.service';
-
-
-
-
-import { first } from 'rxjs/operators';
-
-import { AlertService } from '../../../core/services/alert.service';
-import {  AuthenticationService } from '../../../core/services/authentication.service';
+import { User } from 'src/app/core/models/user';
 
 declare var $: any;
 
@@ -23,47 +16,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
+    public user = new User('jesus','admin@gmail.com' , '123');
+    public errorMsg = '';
 
 
-    loginForm: FormGroup;
-    loading = false;
-    submitted = false;
-    returnUrl: string;
-
-
-
-    constructor(private element: ElementRef,     private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService,
-        private alertService: AlertService)
-        
-        
-        {
-            if (this.authenticationService.currentUserValue) { 
-                this.router.navigate(['/']);
-            }
-
-
-
+    constructor(private element: ElementRef, private AuthService: AuthService , private route: Router) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-      }
+    }
 
     ngOnInit() {
-
-        
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
-
-
-
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         const body = document.getElementsByTagName('body')[0];
@@ -74,8 +36,6 @@ export class LoginComponent implements OnInit, OnDestroy {
             // after 1000 ms we add the class animated to the login/register card
             card.classList.remove('card-hidden');
         }, 700);
-
-
     }
     sidebarToggle() {
         var toggleButton = this.toggleButton;
@@ -98,31 +58,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       body.classList.remove('login-page');
       body.classList.remove('off-canvas-sidebar');
     }
-
-
-      // convenience getter for easy access to form fields
-      get f() { return this.loginForm.controls; }
-
-      onSubmit() {
-          this.submitted = true;
-  
-          // stop here if form is invalid
-          if (this.loginForm.invalid) {
-              return;
-          }
-  
-          this.loading = true;
-          this.authenticationService.login(this.f.username.value, this.f.password.value)
-              .pipe(first())
-              .subscribe(
-                  data => {
-                      this.router.navigate([this.returnUrl]);
-                  },
-                  error => {
-                      this.alertService.error(error);
-                      this.loading = false;
-                  });
-      }
 
  
 }

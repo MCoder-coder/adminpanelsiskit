@@ -49,12 +49,6 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 
-import {  HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor} from './helpers/jwt.interceptor';
-import { ErrorInterceptor} from './helpers/error.interceptor';
-// used to create fake backend
-import { fakeBackendProvider } from './helpers/FakeBackend';
-
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -114,12 +108,7 @@ export class MaterialModule {}
         AuthLayoutComponent
     ],
     providers : [
-      MatNativeDateModule,
-      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-      // provider used to create fake backend
-      fakeBackendProvider
+      MatNativeDateModule
     ],
     bootstrap:    [ AppComponent ]
 })
