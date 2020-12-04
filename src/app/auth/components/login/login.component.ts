@@ -59,5 +59,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       body.classList.remove('off-canvas-sidebar');
     }
 
- 
+    login(){
+        if (this.user) {
+            this.route.navigate(['dashboard']);
+        }else{
+            console.log('Failed to login');
+        }
+    }
 }
