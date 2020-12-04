@@ -1,8 +1,4 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../core/auth.service';
-import { User } from 'src/app/core/models/user';
 
 declare var $: any;
 
@@ -16,11 +12,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
-    public user = new User('jesus','admin@gmail.com' , '123');
-    public errorMsg = '';
 
-
-    constructor(private element: ElementRef, private AuthService: AuthService , private route: Router) {
+    constructor(private element: ElementRef) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
@@ -57,13 +50,5 @@ export class LoginComponent implements OnInit, OnDestroy {
       const body = document.getElementsByTagName('body')[0];
       body.classList.remove('login-page');
       body.classList.remove('off-canvas-sidebar');
-    }
-
-    login(){
-        if (this.user) {
-            this.route.navigate(['dashboard']);
-        }else{
-            console.log('Failed to login');
-        }
     }
 }
