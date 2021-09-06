@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AuthGuardService } from './auth/services/auth-guard.service';
+import { GuestGuardService } from './auth/services/guest-guard.service';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
@@ -8,9 +10,11 @@ export const AppRoutes: Routes = [
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
+      canActivate: [ AuthGuardService ],
     }, {
       path: '',
       component: AdminLayoutComponent,
+      canActivate: [ AuthGuardService ],
       children: [
           {
         path: '',
@@ -48,7 +52,8 @@ export const AppRoutes: Routes = [
       component: AuthLayoutComponent,
       children: [{
         path: 'pages',
-        loadChildren: './pages/pages.module#PagesModule'
+        loadChildren: './pages/pages.module#PagesModule',
+       //canActivate: [ GuestGuardService ]
       }]
     }
 ];

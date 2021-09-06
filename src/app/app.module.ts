@@ -1,7 +1,10 @@
-import { NgModule } from '@angular/core';
+import { AuthModule } from './auth/auth.module';
+import { TokenInterceptorService } from './core/services/token-interceptor.service';
+import { TokenService } from './core/services/token.service';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -49,6 +52,13 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 
+
+
+export function appInitFactory(token: TokenService) {
+  return () => token.load();
+}
+
+
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -81,7 +91,8 @@ import { AppRoutes } from './app.routing';
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule
-  ]
+  ],
+  declarations: []
 })
 export class MaterialModule {}
 
@@ -94,7 +105,7 @@ export class MaterialModule {}
           useHash: true
         }),
         HttpClientModule,
-
+        AuthModule,
         MaterialModule,
         SidebarModule,
         NavbarModule,
@@ -107,7 +118,20 @@ export class MaterialModule {}
         AuthLayoutComponent
     ],
     providers : [
-      MatNativeDateModule
+      MatNativeDateModule,
+      {
+        provide: APP_INITIALIZER,
+        useFactory: appInitFactory,
+        multi: true,
+        deps: [TokenService],
+  
+      },
+  
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptorService,
+        multi: true
+      },
     ],
     bootstrap:    [ AppComponent ]
 })

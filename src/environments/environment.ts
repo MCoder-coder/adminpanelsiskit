@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url_api: 'https://www.juanschtrefotografo.com/schapi/api/',
+  url_login: 'https://www.juanschtrefotografo.com/schapi/api/get-app-token'
 };
