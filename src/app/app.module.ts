@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import {MatNativeDateModule} from '@angular/material/core';
@@ -54,9 +54,9 @@ import { AppRoutes } from './app.routing';
 
 
 
-export function appInitFactory(token: TokenService) {
-  return () => token.load();
-}
+// export function appInitFactory(token: TokenService) {
+//   return () => token.load();
+// }
 
 
 @NgModule({
@@ -110,7 +110,8 @@ export class MaterialModule {}
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedpluginModule
+        FixedpluginModule,
+        ReactiveFormsModule,
     ],
     declarations: [
         AppComponent,
@@ -119,14 +120,14 @@ export class MaterialModule {}
     ],
     providers : [
       MatNativeDateModule,
-      {
-        provide: APP_INITIALIZER,
-        useFactory: appInitFactory,
-        multi: true,
-        deps: [TokenService],
-  
-      },
-  
+      // {
+      //   provide: APP_INITIALIZER,
+      //   useFactory: appInitFactory,
+      //   multi: true,
+      //   deps: [TokenService],
+
+      // },
+
       {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptorService,

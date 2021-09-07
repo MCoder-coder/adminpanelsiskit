@@ -18,12 +18,12 @@ export class AuthService {
 
   login(e: string, p: string) {
     return this.http.post(this.authUrl, {
-      grant_type: 'password',
-      client_id: '2',
-      client_secret: 'srKHlpLcnyLaBhZmQsAIuztgY7C0N8gjZPFKjYgu',
+      grant_type: 'client_credentials',
+      client_id: '5',
+      client_secret: 'oXUATcMvhfJFrChYmfQvLsWCZi0h3orQeN4R341n',
       username: e,
       password: p,
-      scope: ''
+      scope: '*'
     }, this.options);
   }
   /**

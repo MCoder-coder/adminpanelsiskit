@@ -25,7 +25,7 @@ export class GuestGuardService {
         if (
           !localStorage.getItem('access_token')
         ) { return true; }
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('dashboard');
         return false;
       }
 

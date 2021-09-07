@@ -18,41 +18,52 @@ export const AppRoutes: Routes = [
       children: [
           {
         path: '',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        //loadChildren: './dashboard/dashboard.module#DashboardModule'
     }, {
         path: 'components',
-        loadChildren: './components/components.module#ComponentsModule'
+        loadChildren : () => import('./components/components.module').then(m => m.ComponentsModule)
+        //loadChildren: './components/components.module#ComponentsModule'
     }, {
         path: 'forms',
-        loadChildren: './forms/forms.module#Forms'
+        loadChildren: () => import('./forms/forms.module').then(m => m.Forms)
+        //loadChildren: './forms/forms.module#Forms'
     }, {
         path: 'tables',
-        loadChildren: './tables/tables.module#TablesModule'
+        loadChildren : () => import ('./tables/tables.module').then(m => m.TablesModule)
+        //loadChildren: './tables/tables.module#TablesModule'
     }, {
         path: 'maps',
-        loadChildren: './maps/maps.module#MapsModule'
+        loadChildren : () => import('./maps/maps.module').then(m => m.MapsModule)
+        //loadChildren: './maps/maps.module#MapsModule'
     }, {
         path: 'widgets',
-        loadChildren: './widgets/widgets.module#WidgetsModule'
+        loadChildren : () => import('./widgets/widgets.module').then(m => m.WidgetsModule)
+        //loadChildren: './widgets/widgets.module#WidgetsModule'
     }, {
         path: 'charts',
-        loadChildren: './charts/charts.module#ChartsModule'
+        loadChildren : () => import('./charts/charts.module').then(m => m.ChartsModule)
+        //loadChildren: './charts/charts.module#ChartsModule'
     }, {
         path: 'calendar',
-        loadChildren: './calendar/calendar.module#CalendarModule'
+        loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) 
+       // loadChildren: './calendar/calendar.module#CalendarModule'
     }, {
         path: '',
-        loadChildren: './userpage/user.module#UserModule'
+        loadChildren: () => import('./userpage/user.module').then(m => m.UserModule)
+       // loadChildren: './userpage/user.module#UserModule'
     }, {
         path: '',
-        loadChildren: './timeline/timeline.module#TimelineModule'
+        loadChildren : () => import('./timeline/timeline.module').then(m => m.TimelineModule)
+       // loadChildren: './timeline/timeline.module#TimelineModule'
     }
   ]}, {
       path: '',
       component: AuthLayoutComponent,
       children: [{
         path: 'pages',
-        loadChildren: './pages/pages.module#PagesModule',
+        loadChildren : () => import('./pages/pages.module').then(m => m.PagesModule)
+        //loadChildren: './pages/pages.module#PagesModule',
        //canActivate: [ GuestGuardService ]
       }]
     }
