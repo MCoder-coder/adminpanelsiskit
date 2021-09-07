@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
-          <form [formGroup]="form" class="form" method="" (ngSubmit)="login()" action="">
+          <form [formGroup]="form" class="form" method="POST" (ngSubmit)="login()" action="">
             <div class="card card-login card-hidden">
               <div class="card-header card-header-rose text-center">
                 <h4 class="card-title">Log in</h4>
@@ -57,7 +57,7 @@
                 </span>
               </div>
               <div class="card-footer justify-content-center">
-                <a  type="submit" class="btn btn-rose btn-link btn-lg">Lets Go</a>
+                <button  type="submit" class="btn btn-rose btn-link btn-lg">Lets Go</button>
               </div>
             </div>
           </form>

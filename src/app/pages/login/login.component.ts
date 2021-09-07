@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     loading = true
     errors = false
-    router
+
     //authService: any;
     form: FormGroup;
     controls: any;
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
         var navbar : HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         const body = document.getElementsByTagName('body')[0];
@@ -41,27 +42,36 @@ export class LoginComponent implements OnInit, OnDestroy {
             // after 1000 ms we add the class animated to the login/register card
             card.classList.remove('card-hidden');
         }, 700);
+
+
+          // //me suscribo y verifico los cambios
+         this.form.valueChanges.subscribe((value) => {
+             console.log(value);
+         });
+
     }
 
 
     login(): void {
+
         this.loading = true;
         this.errors = false;
 
-         this.authService.login(this.controls.email.value, this.controls.password.value)
-           .subscribe((res: any) => {
-              //Store the access token in the localstorage
-             localStorage.setItem('access_token', res.access_token);
-             this.loading = false;
-             // Navigate to home page
-             this.router.navigate(['/']);
-           }, (err: any) => {
-              //This error can be internal or invalid credentials
-              //You need to customize this based on the error.status code
-             this.loading = false;
-             this.errors = true;
-           });
-      }
+         this.authService.login(this.form.get('email').value, this.form.get('password').value)
+        //    .subscribe((res: any) => {
+        //       //Store the access token in the localstorage
+        //      localStorage.setItem('Token', res.access_token);
+        //      this.loading = false;
+        //     // Navigate to home page
+
+        //    }, (err: any) => {
+        //       //This error can be internal or invalid credentials
+        //       //You need to customize this based on the error.status code
+        //      this.loading = false;
+        //      this.errors = true;
+        //    });
+
+    }
 
 
 

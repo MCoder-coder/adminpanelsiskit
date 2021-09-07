@@ -6,7 +6,7 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 })
 export class AuthGuardService {
 
-  
+
 
       /**
        * Constructor
@@ -24,12 +24,16 @@ export class AuthGuardService {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
       ) {
+        let token =  localStorage.getItem('Token')
         if (
-          localStorage.getItem('access_token')
-        ) { return true; }
-        localStorage.removeItem('access_token');
+            token
+        ){
+
+            return true;
+        }
+        localStorage.removeItem('Token');
         this.router.navigateByUrl('/pages/login');
         return false;
-      }   
+      }
 
 }

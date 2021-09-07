@@ -23,12 +23,15 @@ export class GuestGuardService {
         state: RouterStateSnapshot
       ) {
         if (
-          !localStorage.getItem('access_token')
-        ) { return true; }
+          !localStorage.getItem('Token')
+        ) {
+
+            return true;
+        }
         this.router.navigateByUrl('dashboard');
         return false;
       }
 
 
-  
+
 }

@@ -1,5 +1,7 @@
+
 import { Routes } from '@angular/router';
 import { AuthGuardService } from './auth/services/auth-guard.service';
+
 import { GuestGuardService } from './auth/services/guest-guard.service';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
@@ -14,7 +16,7 @@ export const AppRoutes: Routes = [
     }, {
       path: '',
       component: AdminLayoutComponent,
-      canActivate: [ AuthGuardService ],
+      canActivate: [ AuthGuardService],
       children: [
           {
         path: '',
@@ -46,7 +48,7 @@ export const AppRoutes: Routes = [
         //loadChildren: './charts/charts.module#ChartsModule'
     }, {
         path: 'calendar',
-        loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) 
+        loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
        // loadChildren: './calendar/calendar.module#CalendarModule'
     }, {
         path: '',

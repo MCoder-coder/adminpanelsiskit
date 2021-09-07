@@ -26,7 +26,7 @@ constructor() { }
      * @param attribute The attribute's key
      */
     private attr(attribute: string): string {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem('Token');
       if (token === null || token === undefined) {
         return null;
       } else {
