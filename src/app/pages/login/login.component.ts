@@ -1,81 +1,122 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 declare var $: any;
 
 @Component({
     selector: 'app-login-cmp',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
 })
-
 export class LoginComponent implements OnInit, OnDestroy {
     test: Date = new Date();
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
 
-    loading = true
-    errors = false
+    loading = true;
+    errors = false;
 
     //authService: any;
     form: FormGroup;
     controls: any;
 
-    constructor(private element: ElementRef , private authService : AuthService , private formBuilder: FormBuilder) {
+    constructor(
+        private element: ElementRef,
+        private authService: AuthService,
+        private formBuilder: FormBuilder,
+        private router: Router
+    ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
 
-          //construyo el formulario
-          this.buildForm();
+        //construyo el formulario
+        this.buildForm();
     }
 
     ngOnInit() {
-
-        var navbar : HTMLElement = this.element.nativeElement;
+        var navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         const body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
         body.classList.add('off-canvas-sidebar');
         const card = document.getElementsByClassName('card')[0];
-        setTimeout(function() {
+        setTimeout(function () {
             // after 1000 ms we add the class animated to the login/register card
             card.classList.remove('card-hidden');
         }, 700);
 
+        // //me suscribo y verifico los cambios
+        this.form.valueChanges.subscribe((value) => {
+            console.log(value);
+        });
 
-          // //me suscribo y verifico los cambios
-         this.form.valueChanges.subscribe((value) => {
-             console.log(value);
-         });
+        this.saveDataLogin()
+    }
 
+
+
+    sidebarToggle() {
+        var toggleButton = this.toggleButton;
+        var body = document.getElementsByTagName('body')[0];
+        var sidebar = document.getElementsByClassName('navbar-collapse')[0];
+        if (this.sidebarVisible == false) {
+            setTimeout(function () {
+                toggleButton.classList.add('toggled');
+            }, 500);
+            body.classList.add('nav-open');
+            this.sidebarVisible = true;
+        } else {
+            this.toggleButton.classList.remove('toggled');
+            this.sidebarVisible = false;
+            body.classList.remove('nav-open');
+        }
+    }
+
+    ngOnDestroy() {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.remove('login-page');
+        body.classList.remove('off-canvas-sidebar');
     }
 
 
     login(): void {
-
         this.loading = true;
         this.errors = false;
 
-         this.authService.login(this.form.get('email').value, this.form.get('password').value)
-        //    .subscribe((res: any) => {
-        //       //Store the access token in the localstorage
-        //      localStorage.setItem('Token', res.access_token);
-        //      this.loading = false;
-        //     // Navigate to home page
+        this.authService.login(
+            this.form.get('email').value,
+            this.form.get('password').value
+        );
 
-        //    }, (err: any) => {
-        //       //This error can be internal or invalid credentials
-        //       //You need to customize this based on the error.status code
-        //      this.loading = false;
-        //      this.errors = true;
-        //    });
+        let email = this.form.get('email').value
+        let password = this.form.get('password').value
+
+        localStorage.setItem('email' , email)
+        localStorage.setItem('password', password)
+
+        if (localStorage.getItem('Token') != null) {
+            this.router.navigate(['dashboard']);
+        }
+    }
+
+    saveDataLogin(){
+
+       let email = localStorage.getItem('email')
+       let pass  = localStorage.getItem('password')
+
+        if (email != null  && pass != null) {
+
+            this.form.get('email').setValue(email)
+            this.form.get('password').setValue(pass)
+        }
+
+       //console.log("email" , email)
 
     }
 
-
-
-      private buildForm() {
+    private buildForm() {
         //construyo un grupo de formBuilder y accedo a sus nombres de FormControlName escrivos sus Validators requeridos
         this.form = this.formBuilder.group({
             email: [
@@ -94,10 +135,8 @@ export class LoginComponent implements OnInit, OnDestroy {
                     //Validators.pattern(this.fieldNameSurnamePattern),
                 ],
             ],
-
         });
     }
-
 
     get emailField() {
         return this.form.get('email');
@@ -119,28 +158,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     fieldValid(field: string) {
         //retorno dependiendo el field verifico si es valid o es touched
         return this.form.get(field)?.valid && this.form.get(field)?.touched;
-    }
-
-    sidebarToggle() {
-        var toggleButton = this.toggleButton;
-        var body = document.getElementsByTagName('body')[0];
-        var sidebar = document.getElementsByClassName('navbar-collapse')[0];
-        if (this.sidebarVisible == false) {
-            setTimeout(function() {
-                toggleButton.classList.add('toggled');
-            }, 500);
-            body.classList.add('nav-open');
-            this.sidebarVisible = true;
-        } else {
-            this.toggleButton.classList.remove('toggled');
-            this.sidebarVisible = false;
-            body.classList.remove('nav-open');
-        }
-    }
-
-    ngOnDestroy(){
-      const body = document.getElementsByTagName('body')[0];
-      body.classList.remove('login-page');
-      body.classList.remove('off-canvas-sidebar');
     }
 }

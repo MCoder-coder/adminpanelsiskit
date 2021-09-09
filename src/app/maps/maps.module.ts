@@ -18,7 +18,7 @@ import { VectorMapsComponent } from './vectormaps/vectormaps.component';
   ],
   declarations: [
       FullScreenMapsComponent,
-      GoogleMapsComponent,
+      //GoogleMapsComponent,
       VectorMapsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
