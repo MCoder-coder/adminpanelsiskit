@@ -10,7 +10,9 @@ const SECRET_KEY = 'Token';///key de carruti
 })
 //crypto libreria para encriptar local storage
 export class StorageService {
+
   constructor() {}
+
   public secureStorage = new SecureStorage(localStorage, {
     hash: function hash(key) {
       //encripto con el algoritmo sha256

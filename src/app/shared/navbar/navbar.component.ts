@@ -20,7 +20,10 @@ import {
     PathLocationStrategy,
 } from '@angular/common';
 import { RouteService } from 'src/app/sidebar/services/route.service';
-import { AuthService } from 'src/app/auth/services/auth.service';
+
+//mi servicios
+import { LocalStorageService } from 'src/app/auth/services/local-storage.service';
+
 const misc: any = {
     navbar_menu_visible: 0,
     active_collapse: true,
@@ -50,7 +53,7 @@ export class NavbarComponent implements OnInit {
         private element: ElementRef,
         private router: Router,
         private routeService: RouteService,
-        private logoutServices : AuthService
+        private localStorageService: LocalStorageService
     ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
@@ -259,10 +262,10 @@ export class NavbarComponent implements OnInit {
     }
 
     logout(){
-        let token = localStorage.getItem('Token')
+        let token = this.localStorageService.getJsonValue('Token')
 
         if(token){
-            localStorage.removeItem('Token')
+            this.localStorageService.clearToken('Token')
             this.router.navigate(['/pages/login']);
         }
     }

@@ -41,7 +41,15 @@
                         <i class="material-icons">email</i>
                       </span>
                     </div>
-                    <input formControlName="email" type="email" class="form-control" placeholder="Email...">
+                    <input matInput  formControlName="email" type="email"[class.is-valid]="fieldValid('email')"
+                    [class.is-invalid]="fieldNoValid('email')" class="form-control" placeholder="Email...">
+                    <!-- inicio de mensaje de errores EMAIL -->
+                    <span class="invalid-feedback messages input-group-prepend" [class.active]="emailField.touched"
+                        *ngIf="emailField.touched">
+                        <mat-error *ngIf="emailField.hasError('required')">Este campo es requerido</mat-error>
+                        <mat-error *ngIf="emailField.hasError('pattern')">Esto no es un email valido</mat-error>
+                    </span>
+                    <!-- fin de mensajes de errores EMAIL -->
                   </div>
                 </span>
                 <span class="bmd-form-group">

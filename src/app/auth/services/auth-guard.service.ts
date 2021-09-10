@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthGuardService {
        * @param router The router object
        */
       constructor(
-        private router: Router
+        private router: Router,
+        private localStorageService: LocalStorageService
       ) { }
       /**
        * Can activate function
@@ -24,14 +26,15 @@ export class AuthGuardService {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
       ) {
-        let token =  localStorage.getItem('Token')
+        let token =  this.localStorageService.getJsonValue('Token')
         if (
             token
         ){
 
             return true;
         }
-        localStorage.removeItem('Token');
+       // localStorage.removeItem('Token');
+        this.localStorageService.clearToken('Token')
         this.router.navigateByUrl('/pages/login');
         return false;
       }

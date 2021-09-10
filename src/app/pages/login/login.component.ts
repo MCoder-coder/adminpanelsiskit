@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { LocalStorageService } from 'src/app/auth/services/local-storage.service';
 
 declare var $: any;
 
@@ -15,8 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private sidebarVisible: boolean;
     private nativeElement: Node;
 
-    loading = true;
-    errors = false;
+
 
     //authService: any;
     form: FormGroup;
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         private element: ElementRef,
         private authService: AuthService,
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private localStorageService: LocalStorageService
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -82,8 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     login(): void {
-        this.loading = true;
-        this.errors = false;
+
 
         this.authService.login(
             this.form.get('email').value,
@@ -93,20 +93,27 @@ export class LoginComponent implements OnInit, OnDestroy {
         let email = this.form.get('email').value
         let password = this.form.get('password').value
 
-        localStorage.setItem('email' , email)
-        localStorage.setItem('password', password)
+        this.localStorageService.setJsonValue('email',  email)
+        this.localStorageService.setJsonValue('password' , password)
+        //localStorage.setItem('email' , email)
+        //localStorage.setItem('password', password)
 
-        if (localStorage.getItem('Token') != null) {
+        if (this.localStorageService.getJsonValue('Token') != null) {
             this.router.navigate(['dashboard']);
+
         }
     }
 
     saveDataLogin(){
 
-       let email = localStorage.getItem('email')
-       let pass  = localStorage.getItem('password')
+       let email = this.localStorageService.getJsonValue('email')
+       let pass  = this.localStorageService.getJsonValue('password')
 
         if (email != null  && pass != null) {
+            //contro del logeo automatico
+            // setTimeout(() => {
+            //     this.router.navigate(['dashboard']);
+            // }, 2000);
 
             this.form.get('email').setValue(email)
             this.form.get('password').setValue(pass)

@@ -15,6 +15,7 @@ export class LocalStorageService {
    setJsonValue(key: string, value: any) {
      //almaceno el local storage con clave valor
      this.storageService.secureStorage.setItem(key, value);
+
    }
 
    getJsonValue(key: string) {
@@ -22,13 +23,13 @@ export class LocalStorageService {
      return this.storageService.secureStorage.getItem(key);
    }
 
-   clearToken(key , value) {
-     // limpio todo el carro
-     return this.storageService.secureStorage.removeItem(key , value);
+   clearToken(key) {
+     // limpio todo el token cierro session
+     return this.storageService.secureStorage.removeItem(key);
    }
 
-   deleteItem( key: string ,index : number){
+   deleteItem( key: string){
      //elimina el item de acuerdo al index del mismo
-     return this.storageService.secureStorage.removeItem( key ,index)
+     return this.storageService.secureStorage.removeItem( key)
    }
 }

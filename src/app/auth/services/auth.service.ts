@@ -40,9 +40,8 @@ export class AuthService {
         return this.http
             .post(this.authUrl, body.toString(), options)
             .subscribe((res: any) => {
-                localStorage.setItem('Token', res.access_token);
-                this.localStorageService.setJsonValue('Token' , res.access_token)
-                console.log('res login', res);
+               // localStorage.setItem('Token', res.access_token);
+                 this.localStorageService.setJsonValue('Token' , res.access_token)
             });
     }
 }
