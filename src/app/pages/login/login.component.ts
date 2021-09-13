@@ -1,8 +1,11 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { LocalStorageService } from 'src/app/auth/services/local-storage.service';
+import { AuthService } from 'src/app/layouts/services/auth.service';
+import { LocalStorageService } from 'src/app/layouts/services/storage/local-storage.service';
+import { TokenSessionStorageService } from 'src/app/layouts/services/storage/token-session-storage.service';
+
+
 
 declare var $: any;
 
@@ -27,7 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private formBuilder: FormBuilder,
         private router: Router,
-        private localStorageService: LocalStorageService
+        private localStorageService: LocalStorageService,
+        private tokenSessionService: TokenSessionStorageService
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -37,6 +41,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
+
+        //controla la animacion de incioo del login
         var navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
         const body = document.getElementsByTagName('body')[0];
@@ -52,6 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.form.valueChanges.subscribe((value) => {
             console.log(value);
         });
+
 
         this.saveDataLogin()
     }
@@ -88,20 +96,29 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.login(
             this.form.get('email').value,
             this.form.get('password').value
-        );
+        ).subscribe(res => {
+            console.log("login component" ,res)
+        })
+
+
+        if (this.tokenSessionService.getToken()) {
+            console.log(this.router.navigate(['dashboard']))
+        }
 
         let email = this.form.get('email').value
         let password = this.form.get('password').value
 
-        this.localStorageService.setJsonValue('email',  email)
-        this.localStorageService.setJsonValue('password' , password)
+        if(email == ""  && password == ""){
+            console.log('los campos estan vacios')
+        }else{
+            this.localStorageService.setJsonValue('email',  email)
+            this.localStorageService.setJsonValue('password' , password)
+        }
+
+
         //localStorage.setItem('email' , email)
         //localStorage.setItem('password', password)
 
-        if (this.localStorageService.getJsonValue('Token') != null) {
-            this.router.navigate(['dashboard']);
-
-        }
     }
 
     saveDataLogin(){

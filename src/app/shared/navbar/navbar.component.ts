@@ -5,6 +5,7 @@ import {
     ViewChild,
     ElementRef,
     Directive,
+    NgZone,
 } from '@angular/core';
 //import { ROUTES } from '../.././sidebar/sidebar.component';
 import {
@@ -20,9 +21,13 @@ import {
     PathLocationStrategy,
 } from '@angular/common';
 import { RouteService } from 'src/app/sidebar/services/route.service';
+import { LocalStorageService } from 'src/app/layouts/services/storage/local-storage.service';
+import { TokenSessionStorageService } from 'src/app/layouts/services/storage/token-session-storage.service';
+import { AuthService } from 'src/app/layouts/services/auth.service';
+
 
 //mi servicios
-import { LocalStorageService } from 'src/app/auth/services/local-storage.service';
+
 
 const misc: any = {
     navbar_menu_visible: 0,
@@ -36,7 +41,6 @@ declare var $: any;
     templateUrl: 'navbar.component.html',
 })
 export class NavbarComponent implements OnInit {
-
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
@@ -53,7 +57,9 @@ export class NavbarComponent implements OnInit {
         private element: ElementRef,
         private router: Router,
         private routeService: RouteService,
-        private localStorageService: LocalStorageService
+        private localStorageService: LocalStorageService,
+        private tokenSessionService: TokenSessionStorageService,
+        private authService : AuthService
     ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
@@ -261,12 +267,20 @@ export class NavbarComponent implements OnInit {
         return this.location.prepareExternalUrl(this.location.path());
     }
 
-    logout(){
-        let token = this.localStorageService.getJsonValue('Token')
+    logout() {
 
-        if(token){
-            this.localStorageService.clearToken('Token')
-            this.router.navigate(['/pages/login']);
-        }
+
+       this.tokenSessionService.removeToken();
+
+        //this.authService.logout()
+        this.router.navigate(['pages/login']);
+
+        //solucion temporal
+        window.location.reload();
+        // .then(() => {
+        //     window.location.reload();
+        // });
+        //this.router.navigate(['pages/login']));
+        //this.router.navigate(['pages/login'])
     }
 }

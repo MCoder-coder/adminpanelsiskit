@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
-          <form [formGroup]="form" class="form" method="POST" (ngSubmit)="login()" action="">
+          <form [formGroup]="form" class="form"  (ngSubmit)="login()" action="">
             <div class="card card-login card-hidden">
               <div class="card-header card-header-rose text-center">
                 <h4 class="card-title">INICIAR SESION</h4>
@@ -24,7 +24,7 @@
 
               <div class="card-body ">
                 <!-- <p class="card-description text-center">Or Be Classical</p> -->
-                <span class="bmd-form-group">
+                <!-- <span class="bmd-form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -33,7 +33,7 @@
                     </div>
                     <input type="text" class="form-control" placeholder="First Name...">
                   </div>
-                </span>
+                </span> -->
                 <span class="bmd-form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -99,7 +99,7 @@
         </nav> -->
         <div class="copyright pull-right">
           &copy;
-            {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
+            {{test | date: 'yyyy'}}
           <a href="" target="_blank">Siskit</a> la mejor web.
         </div>
       </div>

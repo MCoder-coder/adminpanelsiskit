@@ -1,9 +1,10 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { RegisterComponent } from './register/register.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { LockComponent } from './lock/lock.component';
 import { LoginComponent } from './login/login.component';
+import { NgModule } from '@angular/core';
 
 export const PagesRoutes: Routes = [
 
@@ -24,3 +25,12 @@ export const PagesRoutes: Routes = [
         }]
     }
 ];
+
+@NgModule({
+    imports: [RouterModule.forRoot(PagesRoutes, {onSameUrlNavigation: 'reload'})],
+    exports: [RouterModule],
+ })
+ export class PageRouting  {
+
+
+}

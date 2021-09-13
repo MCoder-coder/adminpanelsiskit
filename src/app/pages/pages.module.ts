@@ -18,7 +18,8 @@ import { LoginComponent } from './login/login.component';
     RouterModule.forChild(PagesRoutes),
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   declarations: [
     LoginComponent,

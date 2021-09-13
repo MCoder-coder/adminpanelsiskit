@@ -1,4 +1,4 @@
-import { AuthModule } from './auth/auth.module';
+
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
 import { TokenService } from './core/services/token.service';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
@@ -51,6 +51,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+import { AuthInterceptorService } from './layouts/services/auth-interceptor.service';
 
 
 
@@ -105,7 +106,6 @@ export class MaterialModule {}
           useHash: true
         }),
         HttpClientModule,
-        AuthModule,
         MaterialModule,
         SidebarModule,
         NavbarModule,
@@ -127,6 +127,12 @@ export class MaterialModule {}
       //   deps: [TokenService],
 
       // },
+
+    //   {
+    //     provide: HTTP_INTERCEPTORS,
+    //     useClass: AuthInterceptorService,
+    //     multi: true
+    //   },
 
       {
         provide: HTTP_INTERCEPTORS,

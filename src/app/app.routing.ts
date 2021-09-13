@@ -1,18 +1,19 @@
 
-import { Routes } from '@angular/router';
-import { AuthGuardService } from './auth/services/auth-guard.service';
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { GuestGuardService } from './auth/services/guest-guard.service';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AuthGuardService } from './layouts/services/guard/auth-guard.service';
+import { GuestGuardService } from './layouts/services/guard/guest-guard.service';
 
 export const AppRoutes: Routes = [
     {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
-      canActivate: [ AuthGuardService ],
+      canActivate: [ AuthGuardService],
     }, {
       path: '',
       component: AdminLayoutComponent,
@@ -64,9 +65,23 @@ export const AppRoutes: Routes = [
       component: AuthLayoutComponent,
       children: [{
         path: 'pages',
-        loadChildren : () => import('./pages/pages.module').then(m => m.PagesModule)
+        loadChildren : () => import('./pages/pages.module').then(m => m.PagesModule),
         //loadChildren: './pages/pages.module#PagesModule',
-       //canActivate: [ GuestGuardService ]
+        //canActivate: [ GuestGuardService ]
       }]
     }
 ];
+
+
+@NgModule({
+    imports: [RouterModule.forRoot(AppRoutes, {
+
+         preloadingStrategy: PreloadAllModules,
+  })],
+    exports: [RouterModule]
+  })
+
+  export class AppRoutingModule  {
+
+
+}
