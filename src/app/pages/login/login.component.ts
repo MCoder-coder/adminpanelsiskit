@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/layouts/services/auth.service';
-import { LocalStorageService } from 'src/app/layouts/services/storage/local-storage.service';
+import { LocalStorageService } from 'src/app/core/services/storage/local-storage.service';
 import { TokenSessionStorageService } from 'src/app/layouts/services/storage/token-session-storage.service';
 
 

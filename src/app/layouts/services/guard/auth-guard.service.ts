@@ -5,7 +5,7 @@ import {
     RouterStateSnapshot,
 } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { LocalStorageService } from '../storage/local-storage.service';
+import { LocalStorageService } from '../../../core/services/storage/local-storage.service';
 import { TokenSessionStorageService } from '../storage/token-session-storage.service';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { LocalStorageService } from '../storage/local-storage.service';
+import { LocalStorageService } from '../../../core/services/storage/local-storage.service';
 import { TokenSessionStorageService } from '../storage/token-session-storage.service';
 
 

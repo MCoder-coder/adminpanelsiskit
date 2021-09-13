@@ -1,6 +1,6 @@
 import { TokenType } from '@angular/compiler/src/ml_parser/lexer';
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from '../../../core/services/storage/local-storage.service';
 
 
 const ACCESS_TOKEN = 'access_token';

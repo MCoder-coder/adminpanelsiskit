@@ -21,7 +21,7 @@ import {
     PathLocationStrategy,
 } from '@angular/common';
 import { RouteService } from 'src/app/sidebar/services/route.service';
-import { LocalStorageService } from 'src/app/layouts/services/storage/local-storage.service';
+import { LocalStorageService } from 'src/app/core/services/storage/local-storage.service';
 import { TokenSessionStorageService } from 'src/app/layouts/services/storage/token-session-storage.service';
 import { AuthService } from 'src/app/layouts/services/auth.service';
 

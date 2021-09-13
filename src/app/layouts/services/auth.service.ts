@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 
 import { catchError, map, retry, shareReplay, tap } from 'rxjs/operators';
-import { LocalStorageService } from './storage/local-storage.service';
+import { LocalStorageService } from '../../core/services/storage/local-storage.service';
 import { TokenSessionStorageService } from './storage/token-session-storage.service';
 
 
