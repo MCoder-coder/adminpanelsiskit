@@ -1,3 +1,4 @@
+import { RouteInterceptorService } from './sidebar/services/route-intercept.service';
 
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
 import { TokenService } from './core/services/token.service';
@@ -137,6 +138,12 @@ export class MaterialModule {}
       {
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptorService,
+        multi: true
+      },
+
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: RouteInterceptorService,
         multi: true
       },
     ],

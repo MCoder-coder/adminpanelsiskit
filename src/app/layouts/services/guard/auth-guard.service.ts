@@ -20,8 +20,8 @@ export class AuthGuardService {
         private router: Router,
         private localStorageService: LocalStorageService,
         private tokenSessionService: TokenSessionStorageService,
-        private authService : AuthService
-    ) {}
+        private authService: AuthService
+    ) { }
     /**
      * Can activate function
      * @param next The activated route snapshot object
@@ -31,9 +31,9 @@ export class AuthGuardService {
 
 
         if (this.tokenSessionService.getToken()) {
+
             return true;
-        }
-        {
+        } else {
             // localStorage.removeItem('Token');
             console.log("se removio el")
             this.tokenSessionService.removeToken();

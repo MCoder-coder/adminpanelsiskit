@@ -67,7 +67,7 @@ export const AppRoutes: Routes = [
         path: 'pages',
         loadChildren : () => import('./pages/pages.module').then(m => m.PagesModule),
         //loadChildren: './pages/pages.module#PagesModule',
-        //canActivate: [ GuestGuardService ]
+        canActivate: [ GuestGuardService ]
       }]
     }
 ];

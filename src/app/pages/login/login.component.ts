@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/layouts/services/auth.service';
 import { LocalStorageService } from 'src/app/core/services/storage/local-storage.service';
@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-
         //controla la animacion de incioo del login
         var navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
@@ -63,6 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this.saveDataLogin()
     }
+
 
 
 
@@ -92,41 +92,42 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     login(): void {
 
-
         this.authService.login(
             this.form.get('email').value,
             this.form.get('password').value
         ).subscribe(res => {
-            console.log("login component" ,res)
+
+
+            if (this.tokenSessionService.getToken()) {
+                this.router.navigate(['dashboard'])
+            }
+
+            console.log("login component", res)
+
         })
 
-
-        if (this.tokenSessionService.getToken()) {
-            console.log(this.router.navigate(['dashboard']))
-        }
 
         let email = this.form.get('email').value
         let password = this.form.get('password').value
 
-        if(email == ""  && password == ""){
+        if (email == "" && password == "") {
             console.log('los campos estan vacios')
-        }else{
-            this.localStorageService.setJsonValue('email',  email)
-            this.localStorageService.setJsonValue('password' , password)
+        } else {
+            this.localStorageService.setJsonValue('email', email)
+            this.localStorageService.setJsonValue('password', password)
         }
-
 
         //localStorage.setItem('email' , email)
         //localStorage.setItem('password', password)
 
     }
 
-    saveDataLogin(){
+    saveDataLogin() {
 
-       let email = this.localStorageService.getJsonValue('email')
-       let pass  = this.localStorageService.getJsonValue('password')
+        let email = this.localStorageService.getJsonValue('email')
+        let pass = this.localStorageService.getJsonValue('password')
 
-        if (email != null  && pass != null) {
+        if (email != null && pass != null) {
             //contro del logeo automatico
             // setTimeout(() => {
             //     this.router.navigate(['dashboard']);
@@ -136,7 +137,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.form.get('password').setValue(pass)
         }
 
-       //console.log("email" , email)
+        //console.log("email" , email)
 
     }
 
@@ -148,7 +149,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 [
                     Validators.required,
                     Validators.email,
-                    //Validators.pattern(this.fieldEmailPattern),
+                    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"),
                 ],
             ],
             password: [
@@ -183,4 +184,31 @@ export class LoginComponent implements OnInit, OnDestroy {
         //retorno dependiendo el field verifico si es valid o es touched
         return this.form.get(field)?.valid && this.form.get(field)?.touched;
     }
+
+
+
+
+
+    isFieldValid( field: string) {
+        return !this.form.get(field)?.valid && this.form.get(field)?.touched;
+    }
+
+    displayFieldCss( field: string) {
+        return {
+            'has-error': this.isFieldValid( field),
+            'has-feedback': this.isFieldValid( field)
+        };
+    }
+
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
+            }
+        });
+    }
+
 }

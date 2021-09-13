@@ -24,6 +24,7 @@ import { RouteService } from 'src/app/sidebar/services/route.service';
 import { LocalStorageService } from 'src/app/core/services/storage/local-storage.service';
 import { TokenSessionStorageService } from 'src/app/layouts/services/storage/token-session-storage.service';
 import { AuthService } from 'src/app/layouts/services/auth.service';
+import { ChildrenItems } from 'src/app/sidebar/models/children.items.models';
 
 
 //mi servicios
@@ -41,7 +42,7 @@ declare var $: any;
     templateUrl: 'navbar.component.html',
 })
 export class NavbarComponent implements OnInit {
-    private listTitles: any[];
+    listTitles: any[] = [];
     location: Location;
     mobile_menu_visible: any = 0;
     private nativeElement: Node;
@@ -59,7 +60,8 @@ export class NavbarComponent implements OnInit {
         private routeService: RouteService,
         private localStorageService: LocalStorageService,
         private tokenSessionService: TokenSessionStorageService,
-        private authService : AuthService
+        private authService : AuthService,
+
     ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
@@ -124,10 +126,12 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.listTitles = ROUTES.filter(listTitle => listTitle);
-        this.listTitles = this.routeService
-            .routes()
-            .filter((listTitles) => listTitles);
+       // this.listTitles = ROUTES.filter(listTitle => listTitle);
+        //this.listTitles = this.routeService
+          //  .routes()
+            //.filter((listTitles) => listTitles);
+
+        this.getRouteDrawerTitle()
 
         const navbar: HTMLElement = this.element.nativeElement;
         const body = document.getElementsByTagName('body')[0];
@@ -150,6 +154,17 @@ export class NavbarComponent implements OnInit {
                     $layer.remove();
                 }
             });
+    }
+
+    getRouteDrawerTitle(){
+        this.routeService.getDrawer().subscribe(respondeDrawer => {
+
+            //menuItems es un array que lleno con los datos del responseDrawer
+            this.listTitles = respondeDrawer as ChildrenItems[]
+            //fitlro las rutas del array
+            console.log(this.listTitles)
+            this.listTitles.filter(menuItemstitle => menuItemstitle)
+        })
     }
 
     onResize(event) {
@@ -240,6 +255,7 @@ export class NavbarComponent implements OnInit {
         if (titlee.charAt(0) === '#') {
             titlee = titlee.slice(1);
         }
+
         for (let i = 0; i < this.listTitles.length; i++) {
             if (
                 this.listTitles[i].type === 'link' &&
@@ -267,6 +283,8 @@ export class NavbarComponent implements OnInit {
         return this.location.prepareExternalUrl(this.location.path());
     }
 
+
+
     logout() {
 
 
@@ -283,4 +301,6 @@ export class NavbarComponent implements OnInit {
         //this.router.navigate(['pages/login']));
         //this.router.navigate(['pages/login'])
     }
+
+
 }

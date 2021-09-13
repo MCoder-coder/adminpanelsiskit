@@ -3,23 +3,26 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ApiService {
 
-constructor(private http: HttpClient) {
-  
-  this.getForm()
 
-}
+    // Variables
+    authUrl = environment.url_login;
+    apiUrl = environment.url_api;
 
 
-  getForm() {
+    constructor(private http: HttpClient) {
 
-    //return this.http.get(`${environment.url_api}localidades?filters[]={"f":"nombre","o":"LIKE","v":"${localidad}%"}`)
-        return(
-            this.http.get(`${environment.url_api}`)
+    }
+
+
+    getDrawer() {
+        //return this.http.get(`${environment.url_api}localidades?filters[]={"f":"nombre","o":"LIKE","v":"${localidad}%"}`)
+        return (
+            this.http.get(`${environment.url_api}/v4/app/drawer`)
         )
-  }
+    }
 
 }

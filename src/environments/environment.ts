@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  url_api: 'https://www.juanschtrefotografo.com/schapi/api/',
-  url_login: 'https://www.juanschtrefotografo.com/schapi/api/login'
+  url_api: 'http://www.juanschtrefotografo.com/schapi/api/',
+  url_login: 'http://www.juanschtrefotografo.com/schapi/api/login'
 };

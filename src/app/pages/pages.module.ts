@@ -1,3 +1,4 @@
+import { FieldErrorDisplayComponent } from './../forms/validationforms/field-error-display/field-error-display.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,8 @@ import { LoginComponent } from './login/login.component';
     LoginComponent,
     RegisterComponent,
     PricingComponent,
-    LockComponent
+    LockComponent,
+    FieldErrorDisplayComponent
   ]
 })
 

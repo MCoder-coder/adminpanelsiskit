@@ -1,5 +1,8 @@
+import { ChildrenItems } from './models/children.items.models';
+import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { TokenSessionStorageService } from '../layouts/services/storage/token-session-storage.service';
 import { RouteService } from './services/route.service';
 
 declare const $: any;
@@ -127,14 +130,16 @@ export class SidebarComponent implements OnInit {
         return true;
     };
 
-    constructor(private routeService : RouteService){
+    constructor(private routeService : RouteService,   private tokenSessionService: TokenSessionStorageService,){
         //console.log(  "rutas del services" , routeService.routes().filter(menuItems => console.log( "menu item service",menuItems)))
     }
 
     ngOnInit() {
 
       //  this.menuItems = ROUTES.filter(menuItem => console.log(menuItem));
-        this.menuItems = this.routeService.routes().filter(menuItems => menuItems)
+       // this.menuItems = this.routeService.routes().filter(menuItems => menuItems)
+
+        this.getRouteDrawer()
 
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
@@ -152,5 +157,16 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+
+
+    getRouteDrawer(){
+        this.routeService.getDrawer().subscribe(respondeDrawer => {
+
+            //menuItems es un array que lleno con los datos del responseDrawer
+            this.menuItems = respondeDrawer
+            //fitlro las rutas del array
+            this.menuItems.filter(menuItems => menuItems)
+        })
     }
 }

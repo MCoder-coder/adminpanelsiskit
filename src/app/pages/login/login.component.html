@@ -34,6 +34,7 @@
                     <input type="text" class="form-control" placeholder="First Name...">
                   </div>
                 </span> -->
+
                 <span class="bmd-form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -41,13 +42,17 @@
                         <i class="material-icons">email</i>
                       </span>
                     </div>
-                    <input matInput  formControlName="email" type="email"[class.is-valid]="fieldValid('email')"
+
+                    <input   formControlName="email" type="email"[class.is-valid]="fieldValid('email')"
                     [class.is-invalid]="fieldNoValid('email')" class="form-control" placeholder="Email...">
+                    <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Enter a valid email.">
+                    </app-field-error-display>
                     <!-- inicio de mensaje de errores EMAIL -->
                     <span class="invalid-feedback messages input-group-prepend" [class.active]="emailField.touched"
                         *ngIf="emailField.touched">
-                        <mat-error *ngIf="emailField.hasError('required')">Este campo es requerido</mat-error>
-                        <mat-error *ngIf="emailField.hasError('pattern')">Esto no es un email valido</mat-error>
+                        <!-- <mat-error *ngIf="emailField.hasError('required')">Este campo es requerido</mat-error>
+                        <mat-error *ngIf="emailField.hasError('pattern')">Esto no es un email valido</mat-error> -->
+
                     </span>
                     <!-- fin de mensajes de errores EMAIL -->
                   </div>
