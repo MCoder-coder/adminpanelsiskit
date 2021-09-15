@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'src/app/core/services/storage/local-storage.service';
 
 declare const $: any;
 const md: any = {
@@ -17,7 +18,7 @@ const md: any = {
 
 export class FixedpluginComponent implements OnInit {
 
-  constructor() { }
+  constructor( private localStorageService: LocalStorageService,) { }
 
   ngOnInit() {
       // fixed plugin
@@ -73,7 +74,9 @@ export class FixedpluginComponent implements OnInit {
       $('.fixed-plugin .background-color span').click(function() {
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
-          const new_color = $(this).data('color');
+          let new_color = $(this).data('color');
+
+           this.LocalStorageService.setJsonValue('new_color')
 
           if ($sidebar.length !== 0) {
               $sidebar.attr('data-background-color', new_color);

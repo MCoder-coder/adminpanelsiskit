@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             if(res.error){
                 console.log("fail")
             }else{
+
                 let email = this.form.get('email').value
                 let password = this.form.get('password').value
 
@@ -134,16 +135,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         let pass = this.localStorageService.getJsonValue('password')
 
         if (email != null && pass != null) {
-            //contro del logeo automatico
-            // setTimeout(() => {
-            //     this.router.navigate(['dashboard']);
-            // }, 2000);
 
             this.form.get('email').setValue(email)
             this.form.get('password').setValue(pass)
         }
 
-        //console.log("email" , email)
 
     }
 

@@ -287,19 +287,14 @@ export class NavbarComponent implements OnInit {
 
     logout() {
 
-
-       this.tokenSessionService.removeToken();
-
+        //servicio de borrado de token llamodo desde authservice
+        this.authService.logout()
         //this.authService.logout()
         this.router.navigate(['pages/login']);
 
         //solucion temporal
         window.location.reload();
-        // .then(() => {
-        //     window.location.reload();
-        // });
-        //this.router.navigate(['pages/login']));
-        //this.router.navigate(['pages/login'])
+
     }
 
 
