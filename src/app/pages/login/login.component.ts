@@ -104,18 +104,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
             console.log("login component", res)
 
+            if(res.error){
+                console.log("fail")
+            }else{
+                let email = this.form.get('email').value
+                let password = this.form.get('password').value
+
+                if (email == "" && password == "") {
+                    console.log('los campos estan vacios')
+                } else {
+                    this.localStorageService.setJsonValue('email', email)
+                    this.localStorageService.setJsonValue('password', password)
+                }
+            }
+
         })
 
 
-        let email = this.form.get('email').value
-        let password = this.form.get('password').value
 
-        if (email == "" && password == "") {
-            console.log('los campos estan vacios')
-        } else {
-            this.localStorageService.setJsonValue('email', email)
-            this.localStorageService.setJsonValue('password', password)
-        }
 
         //localStorage.setItem('email' , email)
         //localStorage.setItem('password', password)
@@ -167,7 +173,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         return this.form.get('email');
     }
 
-    get passworddField() {
+    get passwordField() {
         return this.form.get('password');
     }
 
@@ -193,22 +199,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         return !this.form.get(field)?.valid && this.form.get(field)?.touched;
     }
 
-    displayFieldCss( field: string) {
-        return {
-            'has-error': this.isFieldValid( field),
-            'has-feedback': this.isFieldValid( field)
-        };
-    }
 
-    validateAllFormFields(formGroup: FormGroup) {
-        Object.keys(formGroup.controls).forEach(field => {
-            const control = formGroup.get(field);
-            if (control instanceof FormControl) {
-                control.markAsTouched({ onlySelf: true });
-            } else if (control instanceof FormGroup) {
-                this.validateAllFormFields(control);
-            }
-        });
-    }
 
 }

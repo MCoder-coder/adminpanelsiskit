@@ -69,13 +69,15 @@ export class AuthService {
                 map((res : any)=> {
                     if (res) {
 
+                        if(res.error){
 
+                        }else{
                         this.tokenSessionService.saveToken(res.access_token)
                         this.tokenSessionService.saveRefreshToken(res.refresh_token)
                         this.tokenSessionService.saveTokenType(res.token_type)
                         this.tokenSessionService.saveExpireIn(res.expires_in)
                         //this.currentOldTokenSubject.next(res.access_token)
-
+                        }
                         return res
                     } else {
                         console.log('else')
