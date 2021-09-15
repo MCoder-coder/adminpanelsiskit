@@ -1,5 +1,5 @@
+import { LocalStorageService } from './../../core/services/storage/local-storage.service';
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from 'src/app/core/services/storage/local-storage.service';
 
 declare const $: any;
 const md: any = {
@@ -7,179 +7,232 @@ const md: any = {
         navbar_menu_visible: 0,
         active_collapse: true,
         disabled_collapse_init: 0,
-    }
+    },
 };
 
 @Component({
-  selector: 'app-fixedplugin',
-  templateUrl: './fixedplugin.component.html',
-  styleUrls: ['./fixedplugin.component.css']
+    selector: 'app-fixedplugin',
+    templateUrl: './fixedplugin.component.html',
+    styleUrls: ['./fixedplugin.component.css'],
 })
-
 export class FixedpluginComponent implements OnInit {
+    constructor(private localStorageService: LocalStorageService) {}
 
-  constructor( private localStorageService: LocalStorageService,) { }
+    ngOnInit() {
+        // fixed plugin
+        const $sidebar = $('.sidebar');
+        const $sidebar_img_container = $sidebar.find('.sidebar-background');
+        //
+        const $full_page = $('.full-page');
+        //
+        const $sidebar_responsive = $('body > .navbar-collapse');
+        const window_width = $(window).width();
 
-  ngOnInit() {
-      // fixed plugin
-      const $sidebar = $('.sidebar');
-      const $sidebar_img_container = $sidebar.find('.sidebar-background');
-      //
-      const $full_page = $('.full-page');
-      //
-      const $sidebar_responsive = $('body > .navbar-collapse');
-      const window_width = $(window).width();
+        const fixed_plugin_open = $(
+            '.sidebar .sidebar-wrapper .nav li.active a p'
+        ).html();
 
-      const fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+        if (window_width > 767 && fixed_plugin_open === 'Dashboard') {
+            if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                $('.fixed-plugin .dropdown').addClass('open');
+            }
+        }
 
-      if ( window_width > 767 && fixed_plugin_open === 'Dashboard' ) {
-          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
-              $('.fixed-plugin .dropdown').addClass('open');
-          }
+        $('.fixed-plugin a').click(function (event) {
+            // Alex: if we click on switch, stop propagation of the event,
+            // so the dropdown will not be hide, otherwise we set the  section active
+            if ($(this).hasClass('switch-trigger')) {
+                if (event.stopPropagation) {
+                    event.stopPropagation();
+                } else if (window.event) {
+                    window.event.cancelBubble = true;
+                }
+            }
+        });
 
-      }
+        $('.fixed-plugin .active-color span').click(function () {
+            const $full_page_background = $('.full-page-background');
 
-      $('.fixed-plugin a').click(function(event) {
-        // Alex: if we click on switch, stop propagation of the event,
-        // so the dropdown will not be hide, otherwise we set the  section active
-          if ($(this).hasClass('switch-trigger')) {
-              if (event.stopPropagation) {
-                  event.stopPropagation();
-              } else if (window.event) {
-                 window.event.cancelBubble = true;
-              }
-          }
-      });
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+            const new_color_filters = $(this).data('color');
 
-      $('.fixed-plugin .active-color span').click(function() {
-          const $full_page_background = $('.full-page-background');
+            localStorage.setItem('new_color_filters' , new_color_filters)
+            let colorFilter = localStorage.getItem('new_color_filters')
 
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-          const new_color = $(this).data('color');
+            if ($sidebar.length !== 0) {
+                $sidebar.attr('data-color', colorFilter);
+            }
 
-          if ($sidebar.length !== 0) {
-              $sidebar.attr('data-color', new_color);
-          }
+            if ($full_page.length !== 0) {
+                $full_page.attr('filter-color', colorFilter);
+            }
 
-          if ($full_page.length !== 0) {
-              $full_page.attr('filter-color', new_color);
-          }
+            if ($sidebar_responsive.length !== 0) {
+                $sidebar_responsive.attr('data-color', colorFilter);
+            }
+        });
 
-          if ($sidebar_responsive.length !== 0) {
-              $sidebar_responsive.attr('data-color', new_color);
-          }
-      });
+        $('.fixed-plugin .background-color span').click(function () {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
 
-      $('.fixed-plugin .background-color span').click(function() {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-          let new_color = $(this).data('color');
+            let new_color = $(this).data('color')
 
-           this.LocalStorageService.setJsonValue('new_color')
+            console.log( 'new_color',new_color)
+            localStorage.setItem('new_color', new_color );
 
-          if ($sidebar.length !== 0) {
-              $sidebar.attr('data-background-color', new_color);
-          }
-      });
+            let colorStorage = localStorage.getItem('new_color');
 
-      $('.fixed-plugin .img-holder').click(function() {
-          const $full_page_background = $('.full-page-background');
+            if ($sidebar.length !== 0) {
 
-          $(this).parent('li').siblings().removeClass('active');
-          $(this).parent('li').addClass('active');
+            //     $sidebar.data('background-color' , colorStorage )
 
-          let new_image = $(this).find('img').attr('src');
+               $sidebar.attr('data-background-color', colorStorage);
 
-          if ( $sidebar_img_container.length !== 0 && $('.switch-sidebar-image input:checked').length !== 0 ) {
-              $sidebar_img_container.fadeOut('fast', function() {
-                 $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-                 $sidebar_img_container.fadeIn('fast');
-              });
-          }
+            //     $sidebar.prop('data-background-color', colorStorage);
+            //     //console.log('attr' , attr)
+             }
+        });
 
-          if ($full_page_background.length !== 0 && $('.switch-sidebar-image input:checked').length !== 0 ) {
-              const new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+        $('.fixed-plugin .img-holder').click(function () {
+            const $full_page_background = $('.full-page-background');
 
-              $full_page_background.fadeOut('fast', function(){
-                 $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-                 $full_page_background.fadeIn('fast');
-              });
-          }
+            $(this).parent('li').siblings().removeClass('active');
+            $(this).parent('li').addClass('active');
 
-          if ( $('.switch-sidebar-image input:checked').length === 0 ) {
-              new_image = $('.fixed-plugin li.active .img-holder').find('img').attr('src');
-              const new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+            let new_image = $(this).find('img').attr('src');
 
-              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-          }
+            if (
+                $sidebar_img_container.length !== 0 &&
+                $('.switch-sidebar-image input:checked').length !== 0
+            ) {
+                $sidebar_img_container.fadeOut('fast', function () {
+                    $sidebar_img_container.css(
+                        'background-image',
+                        'url("' + new_image + '")'
+                    );
+                    $sidebar_img_container.fadeIn('fast');
+                });
+            }
 
-          if ($sidebar_responsive.length !== 0) {
-              $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-          }
-      });
+            if (
+                $full_page_background.length !== 0 &&
+                $('.switch-sidebar-image input:checked').length !== 0
+            ) {
+                const new_image_full_page = $(
+                    '.fixed-plugin li.active .img-holder'
+                )
+                    .find('img')
+                    .data('src');
 
-      $('.switch-sidebar-image input').change(function() {
-          const $full_page_background = $('.full-page-background');
-          const $input = $(this);
+                $full_page_background.fadeOut('fast', function () {
+                    $full_page_background.css(
+                        'background-image',
+                        'url("' + new_image_full_page + '")'
+                    );
+                    $full_page_background.fadeIn('fast');
+                });
+            }
 
-          if ($input.is(':checked')) {
-              if ($sidebar_img_container.length !== 0) {
-                  $sidebar_img_container.fadeIn('fast');
-                  $sidebar.attr('data-image', '#');
-              }
+            if ($('.switch-sidebar-image input:checked').length === 0) {
+                new_image = $('.fixed-plugin li.active .img-holder')
+                    .find('img')
+                    .attr('src');
+                const new_image_full_page = $(
+                    '.fixed-plugin li.active .img-holder'
+                )
+                    .find('img')
+                    .data('src');
 
-              if ($full_page_background.length !== 0) {
-                  $full_page_background.fadeIn('fast');
-                  $full_page.attr('data-image', '#');
-              }
+                $sidebar_img_container.css(
+                    'background-image',
+                    'url("' + new_image + '")'
+                );
+                $full_page_background.css(
+                    'background-image',
+                    'url("' + new_image_full_page + '")'
+                );
+            }
 
-              const background_image = true;
-          } else {
-              if ($sidebar_img_container.length !== 0) {
-                  $sidebar.removeAttr('data-image');
-                  $sidebar_img_container.fadeOut('fast');
-              }
+            if ($sidebar_responsive.length !== 0) {
+                $sidebar_responsive.css(
+                    'background-image',
+                    'url("' + new_image + '")'
+                );
+            }
+        });
 
-              if ($full_page_background.length !== 0) {
-                  $full_page.removeAttr('data-image', '#');
-                  $full_page_background.fadeOut('fast');
-              }
+        $('.switch-sidebar-image input').change(function () {
+            const $full_page_background = $('.full-page-background');
+            const $input = $(this);
 
-              const background_image = false;
-          }
-      });
+            if ($input.is(':checked')) {
+                if ($sidebar_img_container.length !== 0) {
+                    $sidebar_img_container.fadeIn('fast');
+                    $sidebar.attr('data-image', '#');
+                }
 
-      $('.switch-sidebar-mini input').change(function(){
-          const $body = $('body');
+                if ($full_page_background.length !== 0) {
+                    $full_page_background.fadeIn('fast');
+                    $full_page.attr('data-image', '#');
+                }
 
-          const $input = $(this);
+                const background_image = true;
+            } else {
+                if ($sidebar_img_container.length !== 0) {
+                    $sidebar.removeAttr('data-image');
+                    $sidebar_img_container.fadeOut('fast');
+                }
 
-          if (md.misc.sidebar_mini_active === true) {
-              $('body').removeClass('sidebar-mini');
-              md.misc.sidebar_mini_active = false;
+                if ($full_page_background.length !== 0) {
+                    $full_page.removeAttr('data-image', '#');
+                    $full_page_background.fadeOut('fast');
+                }
 
-          } else {
-              setTimeout(function(){
-                  $('body').addClass('sidebar-mini');
+                const background_image = false;
+            }
+        });
 
-                  $('.sidebar .collapse').css('height', 'auto');
-                  md.misc.sidebar_mini_active = true;
-              }, 300);
-          }
+        $('.switch-sidebar-mini input').change(function () {
+            const $body = $('body');
 
-          // we simulate the window Resize so the charts will get updated in realtime.
-          const simulateWindowResize = setInterval(function(){
-              window.dispatchEvent(new Event('resize'));
-          }, 180);
+            const $input = $(this);
 
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function(){
-              clearInterval(simulateWindowResize);
-          }, 1000);
+            if (md.misc.sidebar_mini_active === true) {
 
-      });
-  }
+                $('body').removeClass('sidebar-mini');
 
+                md.misc.sidebar_mini_active = false
+
+                //console.log(md.misc.sidebar_mini_active)
+
+
+            } else {
+                setTimeout(function () {
+                    $('body').addClass('sidebar-mini');
+
+                    $('.sidebar .collapse').css('height', 'auto');
+                    //localStorage.setItem('sidebar_mini_active' , JSON.stringify(md.misc.sidebar_mini_active))
+                    //let mini = localStorage.getItem('sidebar_mini_active')
+                   // console.log( 'mini' ,mini)
+                    md.misc.sidebar_mini_active =  true
+
+
+
+                  //  console.log(md.misc.sidebar_mini_active)
+                }, 300);
+            }
+
+            // we simulate the window Resize so the charts will get updated in realtime.
+            const simulateWindowResize = setInterval(function () {
+                window.dispatchEvent(new Event('resize'));
+            }, 180);
+
+            // we stop the simulation of Window Resize after the animations are completed
+            setTimeout(function () {
+                clearInterval(simulateWindowResize);
+            }, 1000);
+        });
+    }
 }

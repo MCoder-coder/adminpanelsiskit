@@ -28,8 +28,29 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
       this.location = location;
     }
     ngOnInit() {
+        //se agrego variable
+        let sidebar = document.querySelectorAll('.sidebar')
+        console.log( "admin sidebar " ,sidebar)
+        //obtengo el color del sidebar guardado bacckground color
+        let backgroundColor = localStorage.getItem('new_color')
+
+        //verifico que tenga un dato local storage
+        if (backgroundColor) {
+            //seteo el valor
+            sidebar[0].setAttribute('data-background-color' , backgroundColor)
+        }
+
+        //obtengo el dato de sidebarcolorfilter
+        let colorFIlter = localStorage.getItem('new_color_filters')
+        //verifico si este tiene un valor almacenado
+        if(colorFIlter){
+            //seteo el valor
+            sidebar[0].setAttribute('data-color' , colorFIlter)
+        }
+
         const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');
         const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
+
         this.location.subscribe((ev:PopStateEvent) => {
             this.lastPoppedUrl = ev.url;
         });

@@ -47,7 +47,12 @@ export const AppRoutes: Routes = [
         path: 'charts',
         loadChildren : () => import('./charts/charts.module').then(m => m.ChartsModule)
         //loadChildren: './charts/charts.module#ChartsModule'
-    }, {
+    },{
+        path: 'endpoints',
+        loadChildren : () => import('./endpoints/endpoints.module').then(m => m.EndpointsModule)
+       // loadChildren: './timeline/timeline.module#TimelineModule'
+    }
+    , {
         path: 'calendar',
         loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
        // loadChildren: './calendar/calendar.module#CalendarModule'
@@ -60,6 +65,7 @@ export const AppRoutes: Routes = [
         loadChildren : () => import('./timeline/timeline.module').then(m => m.TimelineModule)
        // loadChildren: './timeline/timeline.module#TimelineModule'
     }
+
   ]}, {
       path: '',
       component: AuthLayoutComponent,

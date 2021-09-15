@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { TokenSessionStorageService } from '../layouts/services/storage/token-session-storage.service';
 import { RouteService } from './services/route.service';
+import { LocalStorageService } from '../core/services/storage/local-storage.service';
 
 declare const $: any;
 
@@ -122,7 +123,7 @@ export class SidebarComponent implements OnInit {
 
     public menuItems: any[];
     ps: any;
-
+    emailName = this.localStorageService.getJsonValue('email')
     isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
@@ -130,7 +131,7 @@ export class SidebarComponent implements OnInit {
         return true;
     };
 
-    constructor(private routeService : RouteService,   private tokenSessionService: TokenSessionStorageService,){
+    constructor(private routeService : RouteService,   private tokenSessionService: TokenSessionStorageService, private localStorageService: LocalStorageService,){
         //console.log(  "rutas del services" , routeService.routes().filter(menuItems => console.log( "menu item service",menuItems)))
     }
 
