@@ -69,6 +69,7 @@ export class AuthService {
                 map((res : any)=> {
                     if (res) {
 
+                        console.log(res)
                         if(res.error){
 
                         }else{

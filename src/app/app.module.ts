@@ -52,7 +52,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
-import { AuthInterceptorService } from './layouts/services/auth-interceptor.service';
+
 
 
 
@@ -113,11 +113,13 @@ export class MaterialModule {}
         FooterModule,
         FixedpluginModule,
         ReactiveFormsModule,
+
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        AuthLayoutComponent
+        AuthLayoutComponent,
+
     ],
     providers : [
       MatNativeDateModule,
