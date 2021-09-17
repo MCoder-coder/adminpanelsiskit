@@ -29,14 +29,9 @@ export class RouteService {
 
     constructor(private http: HttpClient , private tokenSessionService: TokenSessionStorageService) {
 
-
     }
 
-
     getDrawer() : Observable<any> {
-
-
-
         //return this.http.get(`${environment.url_api}localidades?filters[]={"f":"nombre","o":"LIKE","v":"${localidad}%"}`)
         return (
             this.http.get<RouteInfo>(`${environment.url_api}v4/app/drawer`).pipe(

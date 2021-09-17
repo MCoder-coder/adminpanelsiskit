@@ -1,14 +1,15 @@
+
 import { ValidatorFn } from '@angular/forms';
 
-export interface FieldConfig {
+export interface FieldConfigOption{
+
     title?: string,
     subtitle?: string,
-    disabled?: boolean,
-    label?: string,
-    name: string,
+    name?: string,
     options?: string[],
     placeholder?: string,
-    type: string,
+    type?: string,
     validation?: ValidatorFn[],
-    value?: any
+    //value?: any
+
 }

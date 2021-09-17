@@ -23,12 +23,15 @@ import { FieldConfig } from '../../models/field-config.interface';
 })
 export class DynamicFormComponent implements OnChanges, OnInit {
 
+    //configuracion de la interface FieldConfig , como estaria configurado el formulario
     @Input()
     config: FieldConfig[] = [];
 
-    @Output()
+    // EventEmitter se usa emitir eventos personalizados de forma sincrónica o asincrónica, y registre controladores para esos eventos suscribiéndose a una instancia. @Output
+    @Output()// proporciona metadatos de configuración
     submit: EventEmitter<any> = new EventEmitter<any>();
 
+    //fomGroup
     form: FormGroup;
 
     get controls() { return this.config.filter(({type}) => type !== 'button'); }
@@ -57,7 +60,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
             const config = this.config.find((control) => control.name === name);
             this.form.addControl(name, this.createControl(config));
           });
-          console.log('configControls' , configControls)
+          console.log('configControls name' , configControls)
       }
     }
 
@@ -71,7 +74,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
     createControl(config: FieldConfig) {
       const { disabled, validation, value } = config;
       let control = this.fb.control({ disabled, value }, validation);
-        console.log('control' , control)
+      //  console.log('control' , control)
       return control
     }
 

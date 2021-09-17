@@ -10,6 +10,7 @@ import { FormSelectComponent } from './components/form-select/form-select.compon
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../app.module';
 
 @NgModule({
     declarations: [
@@ -26,8 +27,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         FormInputComponent,
         FormSelectComponent,
     ],
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule , MaterialModule],
     exports: [DynamicFormComponent , DynamicFieldDirective],
+
+    /**
+     * Cuando queremos que un componente se pueda crear dinámicamente,
+     *  debemos informar a Angular para que pueda exponernos las fábricas de componentes.
+     * Para hacer esto, podemos utilizar una propiedad dentro de nuestra @NgModule()configuración - entryComponents.
+     * Esta es una matriz de componentes que Angular nos expondrá.
+     */
     entryComponents: [
         FormButtonComponent,
         FormInputComponent,

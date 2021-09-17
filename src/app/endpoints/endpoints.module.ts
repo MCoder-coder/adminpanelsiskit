@@ -8,6 +8,9 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { DynamicFormComponent } from '../dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../app.module';
+import { NouisliderModule } from 'ng2-nouislider';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
@@ -18,6 +21,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
     DynamicFormModule,
+    FormsModule,
+    NouisliderModule,
+    TagInputModule,
+    MaterialModule,
   ],
 
 })

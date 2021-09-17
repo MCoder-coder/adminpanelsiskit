@@ -1,7 +1,6 @@
 import { RouteInterceptorService } from './sidebar/services/route-intercept.service';
 
-import { TokenInterceptorService } from './core/services/token-interceptor.service';
-import { TokenService } from './core/services/token.service';
+
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -52,6 +51,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+import { AuthInterceptorService } from './layouts/services/auth-interceptor.service';
 
 
 
@@ -131,17 +131,12 @@ export class MaterialModule {}
 
       // },
 
-    //   {
-    //     provide: HTTP_INTERCEPTORS,
-    //     useClass: AuthInterceptorService,
-    //     multi: true
-    //   },
-
       {
         provide: HTTP_INTERCEPTORS,
-        useClass: TokenInterceptorService,
+        useClass: AuthInterceptorService,
         multi: true
       },
+
 
       {
         provide: HTTP_INTERCEPTORS,
