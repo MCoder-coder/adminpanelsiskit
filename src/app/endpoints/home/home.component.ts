@@ -1,10 +1,11 @@
 import { tap, map } from 'rxjs/operators';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { EventosOptionsFieldService } from 'src/app/core/services/eventos-options-field.service';
 import { DynamicFormComponent } from 'src/app/dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { FieldConfig } from 'src/app/dynamic-form/models/field-config.interface';
 import { filter } from 'rxjs-compat/operator/filter';
+import { config } from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -12,50 +13,21 @@ import { filter } from 'rxjs-compat/operator/filter';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements AfterViewInit, OnInit {
+
+
     @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
 
-    constructor(private eventosFieldOptionService : EventosOptionsFieldService) {}
+    constructor(private eventosFieldOptionService : EventosOptionsFieldService) {
+
+    }
     ngOnInit(): void {
         // throw new Error('Method not implemented.');
         this.getFormOption()
+
     }
 
     config: FieldConfig[] = [
-        // {
-        //     type: 'input',
-        //     label: 'Full name',
-        //     name: 'name',
-        //     placeholder: 'Enter your name',
-        //     validation: [Validators.required, Validators.minLength(4)],
-        // },
-        // {
-        //     type: 'textarea',
-        //     label: 'Full name',
-        //     name: 'name',
-        //     placeholder: 'Enter your name',
-        //     validation: [Validators.required, Validators.minLength(4)],
-        // },
-        // {
-        //     type: 'date',
-        //     label: 'Full name',
-        //     name: 'name',
-        //     placeholder: 'Enter your name',
-        //     validation: [Validators.required, Validators.minLength(4)],
-        // },
-        // {
-        //     type: 'file',
-        //     label: 'Full name',
-        //     name: 'name',
-        //     placeholder: 'Enter your name',
-        //     validation: [Validators.required, Validators.minLength(4)],
-        // },
-        // {
-        //     type: 'textbox',
-        //     label: 'Full name',
-        //     name: 'name',
-        //     placeholder: 'Enter your name',
-        //     validation: [Validators.required, Validators.minLength(4)],
-        // },
+
         // {
         //     type: 'select',
         //     label: 'Favourite Food',
@@ -64,21 +36,21 @@ export class HomeComponent implements AfterViewInit, OnInit {
         //     placeholder: 'Select an option',
         //     validation: [Validators.required],
         // },
-         {
-             label: 'Submit',
-             name: 'submit',
-             type: 'button',
-         },
+
     ];
 
     ngAfterViewInit(): void {
-        let previousValid = this.form.valid;
-        this.form.changes.subscribe(() => {
-            if (this.form.valid !== previousValid) {
-                previousValid = this.form.valid;
-                this.form.setDisabled('submit', !previousValid);
-            }
-        });
+         let previousValid = this.form.valid;
+         this.form.changes.subscribe(() => {
+
+            // console.log("cambios" , changes)
+             if (this.form.valid !== previousValid) {
+                 previousValid = this.form.valid;
+                // this.form.setDisabled('submit', !previousValid);
+
+             }
+         });
+
 
         // this.form.setDisabled('submit', true);
         //this.form.setValue('name', 'Todd Motto');
@@ -89,15 +61,41 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
 
+
+
     getFormOption(){
         this.eventosFieldOptionService.getFieldOption().subscribe(responseField =>{
 
+            //this.config = responseField as FieldConfig[]
+            this.config = responseField as FieldConfig[]
+            this.config.filter((fieldFilter: any) => {
 
-            this.config = responseField
+                fieldFilter.validation = [Validators.required , Validators.minLength(4)]
 
 
-            console.log("fieldResponse" , responseField)
+               // fieldFilter.validation = [Validators.required]
+                //this.form.ge
+              //  this.fieldNoValid(fieldFilter.name)
+               console.log("filter" ,fieldFilter  )
+            })
+           // console.log("fieldResponse" , responseField)
 
         })
+    }
+
+
+
+    //validador de campos no validos genericos formControlName
+    //touched si el campo a sido manipulado y invalido si el campo no es invalido
+    fieldNoValid(field: string) {
+        //retorno dependiendo el field verifico si es invalid o es touched
+        return this.form.form.get(field)?.invalid && this.form.form.get(field)?.touched;
+    }
+
+    //validador de campos validos genericos formControlName
+    //touched si el campo a sido manipulado y invalido si el campo no es invalido
+    fieldValid(field: string) {
+        //retorno dependiendo el field verifico si es valid o es touched
+        return this.form.form.get(field)?.valid && this.form.form.get(field)?.touched;
     }
 }

@@ -36,10 +36,10 @@ import { MaterialModule } from '../app.module';
      * Para hacer esto, podemos utilizar una propiedad dentro de nuestra @NgModule()configuración - entryComponents.
      * Esta es una matriz de componentes que Angular nos expondrá.
      */
-    entryComponents: [
-        FormButtonComponent,
-        FormInputComponent,
-        FormSelectComponent,
-    ],
+    // entryComponents: [
+    //     FormButtonComponent,
+    //     FormInputComponent,
+    //     FormSelectComponent,
+    // ],
 })
 export class DynamicFormModule {}

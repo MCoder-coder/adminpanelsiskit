@@ -6,16 +6,11 @@ import { FieldConfig } from '../../models/field-config.interface';
 @Component({
     selector: 'app-form-textbox',
     template: `
-        <div dynamic-field app-form-textbox class="col-sm-4" >
-            <p>{{config.name}}</p>
-            <div class="form-group" [formGroup]="group">
-                <input
-                [formControlName]="config.name"
-                    type="textbox"
-                    value=""
-                    placeholder=""
-                    class="form-control"
-                />
+        <div dynamic-field app-form-textbox >
+            <div >
+                <mat-form-field class="form-group" [formGroup]="group" class="example-full-width">
+                <input matInput [placeholder]="config.name" [formControlName]="config.name" [type]="config.type">
+              </mat-form-field>
             </div>
         </div>
     `,
@@ -24,17 +19,6 @@ import { FieldConfig } from '../../models/field-config.interface';
 export class FormTextboxComponent implements OnInit {
 
 
-//     <div
-//     class="dynamic-field form-select"
-//     [formGroup]="group">
-//     <label>{{ config.label }}</label>
-//     <select [formControlName]="config.name">
-//       <option value="">{{ config.placeholder }}</option>
-//       <option *ngFor="let option of config.options">
-//         {{ option }}
-//       </option>
-//     </select>
-//   </div>
 
     config: FieldConfigOption;
     group: FormGroup;

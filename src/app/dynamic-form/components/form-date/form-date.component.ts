@@ -7,14 +7,14 @@ import { FieldConfig } from '../../models/field-config.interface';
     selector: 'app-form-date',
     template: `
         <div class="row">
-            <div class="col-md-4 mr-auto">
-                <legend>{{config.name}}</legend>
+            <div class="col-md-12 mr-auto">
+
                 <mat-form-field dynamic-field app-form-date [formGroup]="group">
                     <input
                     [formControlName]="config.name"
                         matInput
                         [matDatepicker]="picker"
-                        placeholder="Choose a date"
+                        [placeholder]="config.name"
                         (click)="picker.open()"
 
                     />

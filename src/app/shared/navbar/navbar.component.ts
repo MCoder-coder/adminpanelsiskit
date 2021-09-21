@@ -162,7 +162,7 @@ export class NavbarComponent implements OnInit {
             //menuItems es un array que lleno con los datos del responseDrawer
             this.listTitles = respondeDrawer as ChildrenItems[]
             //fitlro las rutas del array
-            console.log(this.listTitles)
+            //console.log(this.listTitles)
             this.listTitles.filter(menuItemstitle => menuItemstitle)
         })
     }

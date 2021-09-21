@@ -25,7 +25,7 @@ export class EventosOptionsFieldService {
         return (
             this.http.get<FieldConfig>(`${environment.url_api}v4/eventos/options`).pipe(
                 map((resFieldOption : any )=> {
-                    console.log("optionField" , resFieldOption.data[0].fields)
+                   // console.log("optionField" , resFieldOption.data[0].fields)
                     return resFieldOption.data[0].fields
                 })
             )
