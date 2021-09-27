@@ -58,8 +58,8 @@ export class AuthService {
         //opciones del body
         const body = new HttpParams()
             .set('grant_type', 'password')
-            .set('client_id', '3')
-            .set('client_secret', '1wiHTUApPgQGVrwNkchIPQuIVL8xDhkLVvKEFoUA')
+            .set('client_id', '7')
+            .set('client_secret', 'OHIDkld4CLMlOjCgkyzGmsDpl80BYrOwn93IqZxT')
             .set('scope', '*')
             .set('username', e)
             .set('password', p);

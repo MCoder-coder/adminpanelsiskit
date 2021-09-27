@@ -15,11 +15,6 @@
                     >
 
                     </dynamic-form>
-                     <span class="invalid-feedback messages input-group-prepend" [class.active]="config.validation"
-                    *ngIf="config.validation">
-                        <mat-error class="ml-3" *ngIf="config.validation">Este campo es requerido</mat-error>
-                        <mat-error class="ml-3" *ngIf="emailField.hasError('pattern')">Esto no es un email valido</mat-error>
-                    </span>
 
 
                     {{ form.valid }}

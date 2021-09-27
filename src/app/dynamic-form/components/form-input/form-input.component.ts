@@ -14,7 +14,7 @@ import { FieldConfig } from '../../models/field-config.interface';
       <label>{{ config.label }}</label>
       <input
         [type]="config.type"
-
+        
         [formControlName]="config.name">
     </div>
   `

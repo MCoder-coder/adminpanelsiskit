@@ -24,26 +24,17 @@ export class HomeComponent implements AfterViewInit, OnInit {
         // throw new Error('Method not implemented.');
         this.getFormOption()
 
+
+
     }
 
-    config: FieldConfig[] = [
-
-        // {
-        //     type: 'select',
-        //     label: 'Favourite Food',
-        //     name: 'food',
-        //     options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-        //     placeholder: 'Select an option',
-        //     validation: [Validators.required],
-        // },
-
-    ];
+    config: FieldConfig[] = [ ];
 
     ngAfterViewInit(): void {
          let previousValid = this.form.valid;
-         this.form.changes.subscribe(() => {
+         this.form.changes.subscribe((changes) => {
 
-            // console.log("cambios" , changes)
+            console.log("cambios" , changes)
              if (this.form.valid !== previousValid) {
                  previousValid = this.form.valid;
                 // this.form.setDisabled('submit', !previousValid);
@@ -51,9 +42,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
              }
          });
 
-
-        // this.form.setDisabled('submit', true);
-        //this.form.setValue('name', 'Todd Motto');
     }
 
     submit(value: { [name: string]: any }) {
@@ -70,15 +58,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
             this.config = responseField as FieldConfig[]
             this.config.filter((fieldFilter: any) => {
 
-                fieldFilter.validation = [Validators.required , Validators.minLength(4)]
-
+                fieldFilter.validation = [Validators.required ]
 
                // fieldFilter.validation = [Validators.required]
                 //this.form.ge
               //  this.fieldNoValid(fieldFilter.name)
                console.log("filter" ,fieldFilter  )
             })
-           // console.log("fieldResponse" , responseField)
+           console.log("fieldResponse" , responseField)
 
         })
     }

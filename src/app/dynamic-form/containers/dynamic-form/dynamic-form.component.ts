@@ -38,7 +38,7 @@ import { FieldConfig } from '../../models/field-config.interface';
  *  Este será el único componente que será expuesto por nuestro módulo de formularios dinámicos,
  * siendo responsable de aceptar una configuración de formulario y crear el formulario.
  */
-export class DynamicFormComponent implements OnChanges, OnInit {
+export class DynamicFormComponent implements OnChanges {
     //configuracion de la interface FieldConfig , como estaria configurado el formulario
     @Input()
     config: FieldConfig[] = [];
@@ -55,7 +55,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
     form: FormGroup;
 
     get controls() {
-        return this.config.filter(({ type }) => type !== 'button');
+        return this.config.filter(({ type }) => type );
     }
     get changes() {
         return this.form.valueChanges;
@@ -71,8 +71,6 @@ export class DynamicFormComponent implements OnChanges, OnInit {
 
     ngOnInit() {
         this.form = this.createGroup();
-
-       // console.log("foorm container" , this.form)
     }
 
     ngOnChanges() {
@@ -96,7 +94,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
                     this.form.addControl(name, this.createControl(config));
 
                 });
-            //console.log('configControls name', configControls);
+            console.log('configControls name', configControls);
         }
     }
 
@@ -116,28 +114,19 @@ export class DynamicFormComponent implements OnChanges, OnInit {
     }
 
 
+    getControlForm(name : string){
+        this.form.get(name)?.invalid  && this.form.get(name)?.touched;
+    }
+
 
     createControl(config: FieldConfig) {
         const { disabled, validation, value } = config;
         let control = this.fb.control({ disabled, value }, validation);
-        //console.log('createControl', control);
+        console.log('createControl', control);
         return control;
     }
 
 
-       //validador de campos no validos genericos formControlName
-    //touched si el campo a sido manipulado y invalido si el campo no es invalido
-    fieldNoValid(field: string) {
-        //retorno dependiendo el field verifico si es invalid o es touched
-        return this.form.get(field)?.invalid && this.form.get(field)?.touched;
-    }
-
-    //validador de campos validos genericos formControlName
-    //touched si el campo a sido manipulado y invalido si el campo no es invalido
-    fieldValid(field: string) {
-        //retorno dependiendo el field verifico si es valid o es touched
-        return this.form.get(field)?.valid && this.form.get(field)?.touched;
-    }
 
 
     handleSubmit(event: Event) {
@@ -146,20 +135,20 @@ export class DynamicFormComponent implements OnChanges, OnInit {
         this.submit.emit(this.value);
     }
 
-    setDisabled(name: string, disable: boolean) {
-        if (this.form.controls[name]) {
-            const method = disable ? 'disable' : 'enable';
-            this.form.controls[name][method]();
-            return;
-        }
+    // setDisabled(name: string, disable: boolean) {
+    //     if (this.form.controls[name]) {
+    //         const method = disable ? 'disable' : 'enable';
+    //         this.form.controls[name][method]();
+    //         return;
+    //     }
 
-        this.config = this.config.map((item) => {
-            if (item.name === name) {
-                item.disabled = disable;
-            }
-            return item;
-        });
-    }
+    //     this.config = this.config.map((item) => {
+    //         if (item.name === name) {
+    //             item.disabled = disable;
+    //         }
+    //         return item;
+    //     });
+    // }
 
 
 
