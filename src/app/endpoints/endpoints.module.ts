@@ -13,6 +13,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { TagInputModule } from 'ngx-chips';
 
 
+
 @NgModule({
   declarations: [HomeComponent, EventosComponent, PedidosComponent ,   ],
   imports: [
@@ -25,6 +26,7 @@ import { TagInputModule } from 'ngx-chips';
     NouisliderModule,
     TagInputModule,
     MaterialModule,
+
   ],
 
 })

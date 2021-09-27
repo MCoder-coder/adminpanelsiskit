@@ -15,21 +15,21 @@ import { FieldConfig } from '../../models/field-config.interface';
     exportAs: 'dynamicForm',
     selector: 'dynamic-form',
     styleUrls: ['dynamic-form.component.css'],
-    templateUrl: 'dynamic-form.component.html',
-    //   template: `
-    //     <form
-    //       class="dynamic-form"
-    //       [formGroup]="form"
-    //       (submit)="handleSubmit($event)">
-    //       <ng-container
-    ////
+    template: `
+    <form
+      class="dynamic-form"
+      [formGroup]="form"
+      (submit)="handleSubmit($event)">
+      <ng-container
+        *ngFor="let field of config "
+        dynamicField
+        [config]="field"
+        [group]="form"
+        >
+      </ng-container>
 
-    //         dynamicField
-    //         [config]="field"
-    //         [group]="form">
-    //       </ng-container>
-    //     </form>
-    //   `
+    </form>
+    `
 })
 
 /**
