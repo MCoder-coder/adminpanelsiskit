@@ -3,51 +3,84 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header card-header-rose card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">assignment</i>
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Eventos</h4>
                     </div>
-                    <h4 class="card-title">Simple Table</h4>
-                  </div>
                     <div class="card-body">
                         <div class="table-responsive">
 
 
+
                             <table class="table">
-                                    <thead>
-                                        <tr >
+                                <thead>
+                                    <tr>
 
-                                          <th *ngFor="let item of tableData.headerRow ; let i = index" >{{item.title}}</th>
 
-                                          <th class="text-right"></th>
-                                          <th class="text-right"></th>
-                                        </tr>
-                                    </thead>
-                                  <tbody>
-                                      <tr >
-                                          <td class="text-center" ></td>
-                                          <td  *ngFor="let row of tableData.dataRows let i = index">{{row.nombre}}</td>
-                                          <td></td>
-                                          <td></td>
+                                        <th class *ngFor="let item of tableData.headerRow ; let i = index">
+                                            {{item.title}}
+                                        </th>
 
-                                          <td class="td-actions text-right">
-                                              <button mat-raised-button type="button" class="btn btn-info {">
-                                                  <i class="material-icons">person</i>
-                                              </button>
-                                              <button mat-raised-button type="button" class="btn btn-success ">
-                                                  <i class="material-icons">edit</i>
-                                              </button>
-                                              <button mat-raised-button type="button" class="btn btn-danger ">
-                                                  <i class="material-icons">close</i>
-                                              </button>
-                                          </td>
-                                      </tr>
-                                  </tbody>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of tableData.dataRows | keyvalue   let i = index">
+                                        <td class="text-right">{{row.key}}</td>
+                                        <td class="text-right">{{row.value.nombre}}</td>
+                                        <td class="descripcion">{{row.value.descripcion}}</td>
+                                        <td class="fecha">{{row.value.fecha}}</td>
+                                        <td class="text-right">
+                                            <img src="{{ 'https://www.juanschtrefotografo.com/'+ row.value.imgcaratula}}"
+                                                alt>
+                                        </td>
+                                        <!-- <td  class="text-right"  *ngFor="let objKey of _object.keys(row); let j = index" >{{ row[objKey]}} </td> -->
+
+
+                                        <!-- <img src="{{ 'https://www.juanschtrefotografo.com/'+ row[objKey]}}" alt=""> -->
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button"
+                                                class="mat-focus-indicator mat-raised-button mat-button-base btn btn-info btn-link">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">update</i>
+                                                </span>
+                                                <span matripple class="mat-ripple mat-button-ripple"
+                                                    ng-reflect-disabled="false" ng-reflect-centered="false"
+                                                    ng-reflect-trigger="[object HTMLButtonElement]"></span>
+                                                <span class="mat-button-focus-overlay"></span>
+                                            </button>
+
+                                            <button mat-raised-button type="button"
+                                                class="mat-focus-indicator mat-raised-button mat-button-base btn btn-link btn-success">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">edit</i>
+                                                </span>
+                                                <span matripple class="mat-ripple mat-button-ripple"
+                                                    ng-reflect-disabled="false" ng-reflect-centered="false"
+                                                    ng-reflect-trigger="[object HTMLButtonElement]"></span>
+                                                <span class="mat-button-focus-overlay"></span>
+                                            </button>
+                                            <button mat-raised-button type="button"
+                                                class="mat-focus-indicator mat-raised-button mat-button-base btn btn-danger btn-link">
+                                                <span class="mat-button-wrapper">
+                                                    <i class="material-icons">close</i>
+                                                </span>
+                                                <span matripple class="mat-ripple mat-button-ripple"
+                                                    ng-reflect-disabled="false" ng-reflect-centered="false"
+                                                    ng-reflect-trigger="[object HTMLButtonElement]"></span>
+                                                <span class="mat-button-focus-overlay"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div>

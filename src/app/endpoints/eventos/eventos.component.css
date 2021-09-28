@@ -1,0 +1,21 @@
+img{
+    max-width: 150px;
+}
+
+
+.descripcion{
+    text-align: center!important;
+}
+
+th{
+    text-align: center;
+}
+
+.td-actions {
+    display: flex!important;
+
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    /* padding: 5px 26px; */
+    vertical-align: middle;
+}

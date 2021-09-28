@@ -16,7 +16,7 @@ export class EventosService {
         return (
             this.http.get(`${environment.url_api}v4/eventos/`).pipe(
                 map((resEventos : any )=> {
-                    console.log("resEventos" , resEventos.data.eventos)
+                  //  console.log("resEventos" , resEventos.data.eventos)
                     return resEventos.data.eventos
                 })
             )
