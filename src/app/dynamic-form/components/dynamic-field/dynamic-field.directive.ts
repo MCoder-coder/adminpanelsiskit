@@ -1,6 +1,4 @@
-import { FormFileComponent } from './../form-file/form-file.component';
-import { FormDateComponent } from './../form-date/form-date.component';
-import { FormTextareaComponent } from './../form-textarea/form-textarea.component';
+
 import {
     ComponentFactoryResolver,
     ComponentRef,
@@ -13,13 +11,18 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { FormButtonComponent } from '../form-button/form-button.component';
-import { FormInputComponent } from '../form-input/form-input.component';
-import { FormSelectComponent } from '../form-select/form-select.component';
+
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
-import { FormTextboxComponent } from '../form-textbox/form-textbox.component';
+import { FormButtonComponent } from '../field-button/form-button.component';
+import { FormInputComponent } from '../field-input/form-input.component';
+import { FormSelectComponent } from '../form-select/form-select.component';
+import { FormTextareaComponent } from '../form-textarea/form-textarea.component';
+import { FormDateComponent } from '../field-date/form-date.component';
+import { FormFileComponent } from '../field-file/form-file.component';
+import { FormTextboxComponent } from '../field-textbox/form-textbox.component';
+
 
 /**
  * CLASE CONTENEDOR
