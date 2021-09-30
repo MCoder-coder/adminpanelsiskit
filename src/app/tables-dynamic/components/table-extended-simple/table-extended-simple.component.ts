@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TableData } from '../../table-data';
+import { TableData } from 'src/app/md/md-table/md-table.component';
+
+
 
 @Component({
     selector: 'app-table-extended-simple',
@@ -13,10 +15,11 @@ import { TableData } from '../../table-data';
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" >
+                    <table class="table">
                         <thead>
                             <tr>
-                                <th class="text-center" appTable [tableData]="tableData.dataRows">{{tableData.dataRows}} </th>
+                                <th class="text-center" *ngFor="let item of tableData" >{{item.title}}</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -58,13 +61,13 @@ import { TableData } from '../../table-data';
 })
 export class TableExtendedSimpleComponent implements OnInit {
 
-
-    tableData: TableData;
     @Input()
-    headerRow: [] = [];
+    tableData: any;
 
 
-    dataRows: any;
+    @Input()
+    table : TableData
+
     constructor() {}
 
     ngOnInit(): void {}

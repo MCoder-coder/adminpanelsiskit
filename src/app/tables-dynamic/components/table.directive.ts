@@ -4,75 +4,60 @@ import {
     Directive,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     SimpleChanges,
     Type,
     ViewContainerRef,
 } from '@angular/core';
+
+
+import { TableData } from '../table-data';
+
 import { TableExtendedSimpleComponent } from './table-extended-simple/table-extended-simple.component';
 import { TablePlainComponent } from './table-plain/table-plain.component';
-
-declare interface TableData {
-    headerRow?: [];
-    dataRows?: [];
-}
-
-const components: { [type: string]: Type<TableData> } = {
-    tablesimple: TableExtendedSimpleComponent,
-
-};
 
 
 
 @Directive({
     selector: '[appTable]',
 })
-export class TableDirective implements OnChanges, OnInit {
+export class TableDirective implements OnInit , OnDestroy {
 
     @Input()
-    tableData: TableData;
+    tableData: any;
 
     @Input()
-     dataRows : any
+    table : TableData
+
      //el componente hacer referencian al modelo Field
-     component: ComponentRef<TableData>;
+     componentRef: ComponentRef<TableExtendedSimpleComponent>;
 
     constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
+        private resolver: ComponentFactoryResolver,
         //Representa un contenedor donde se pueden adjuntar una o más vistas a un componente
-        private container: ViewContainerRef
+        private viewContainerRef: ViewContainerRef
     ) {}
+
 
 
     ngOnInit(): void {
 
-         // console.log('config', this.config);
-         if (!components) {
-            const supportedTypes = Object.keys(components).join(', ');
 
-            throw new Error(
-                `Trying to use an unsupported type (${components}).
-                Supported types: ${supportedTypes}`
-            );
-        }
+        const factory = this.resolver.resolveComponentFactory(TableExtendedSimpleComponent)
+        this.viewContainerRef.clear()
+        this.componentRef = this.viewContainerRef.createComponent(factory)
 
 
-        const component = this.componentFactoryResolver.resolveComponentFactory(
-            TableExtendedSimpleComponent
-        );
+        this.componentRef.instance.tableData = this.tableData
 
-        this.component = this.container.createComponent(component)
-        this.component.instance.dataRows = this.dataRows
+        console.log(this.componentRef)
 
     }
 
 
-
-    ngOnChanges( )  {
-        if (this.component) {
-            //instancio la
-            this.component.instance.dataRows = this.dataRows;
-            //this.component.instance.headerRow = this.headerRow;
-        }
+    ngOnDestroy(): void {
+        this.componentRef.destroy()
     }
+
 }

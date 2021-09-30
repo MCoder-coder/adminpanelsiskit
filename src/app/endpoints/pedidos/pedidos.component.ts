@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { TableData } from 'src/app/tables-dynamic/table-data';
 
 
 
@@ -6,7 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   selector: 'app-pedidos',
   template: `
     <app-table-contenedor
-
+        [tableData]="tableData"
     >
 
     </app-table-contenedor>
@@ -17,12 +18,14 @@ export class PedidosComponent implements OnInit {
 
 
 
-//tableData: TableData;
-
+    //tableData: TableData;
+    tableData: any;
   constructor() { }
 
   ngOnInit(): void {
-     // this.table.tableData["one"]
+
+    this.tableData = ["hola"]
+
   }
 
 }

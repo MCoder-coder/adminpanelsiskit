@@ -19,13 +19,8 @@ export class EventosComponent implements OnInit {
     fieldConfig : FieldConfig [] = []
     rowConfig : RowConfig  [] =  []
 
-    tableData = {
-        headerRow: [ ],
-        dataRows: [ ]
-     };
 
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = new MatTableDataSource(this.tableData.dataRows);
+    tableData: any;
 
 
     constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService) {}
@@ -37,14 +32,13 @@ export class EventosComponent implements OnInit {
         this.getFormOption()
         this.getEventos()
 
-        this.dataSource.sort = this.sort;
 
     }
 
     getEventos(){
         this.eventosService.getEventos().subscribe((resEventos : any) => {
 
-            this.tableData.dataRows = resEventos
+           // this.tableData.dataRows = resEventos
             console.log(resEventos)
         })
     }
@@ -56,9 +50,10 @@ export class EventosComponent implements OnInit {
 
             //this.config = responseField as FieldConfig[]
             console.log(responseField)
-            this.tableData.headerRow = responseField
+           // this.tableData.headerRow = responseField
 
-
+            this.tableData = responseField
+            console.log(this.tableData)
         })
     }
 }

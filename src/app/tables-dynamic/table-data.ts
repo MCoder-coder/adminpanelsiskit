@@ -1,5 +1,5 @@
 
 export interface TableData {
-    headerRow: string[];
-    dataRows: string[][];
+    headerRow?: any;
+    dataRow?: any;
 }

@@ -1,54 +1,5 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header card-header-rose card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">assignment</i>
-                    </div>
-                    <h4 class="card-title">Simple Table</h4>
-                  </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
+<app-table-contenedor
+[tableData]="tableData"
+>
 
-
-                            <table class="table">
-                                    <thead>
-                                        <tr >
-
-                                          <th *ngFor="let item of tableData.headerRow ; let i = index" >{{item.title}}</th>
-
-                                          <th class="text-right"></th>
-                                          <th class="text-right"></th>
-                                        </tr>
-                                    </thead>
-                                  <tbody>
-                                      <tr >
-                                          <td class="text-center" ></td>
-                                          <td  *ngFor="let row of tableData.dataRows let i = index">{{row.nombre}}</td>
-                                          <td></td>
-                                          <td></td>
-
-                                          <td class="td-actions text-right">
-                                              <button mat-raised-button type="button" class="btn btn-info {">
-                                                  <i class="material-icons">person</i>
-                                              </button>
-                                              <button mat-raised-button type="button" class="btn btn-success ">
-                                                  <i class="material-icons">edit</i>
-                                              </button>
-                                              <button mat-raised-button type="button" class="btn btn-danger ">
-                                                  <i class="material-icons">close</i>
-                                              </button>
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+</app-table-contenedor>
