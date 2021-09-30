@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 import { NouisliderModule } from 'ng2-nouislider';
 import { TagInputModule } from 'ngx-chips';
+import { TablesModule } from '../tables/tables.module';
+import { TablesDynamicModule } from '../tables-dynamic/tables-dynamic.module';
 
 
 
@@ -26,7 +28,7 @@ import { TagInputModule } from 'ngx-chips';
     NouisliderModule,
     TagInputModule,
     MaterialModule,
-
+    TablesDynamicModule
   ],
 
 })
