@@ -6,11 +6,7 @@ import { TableData } from 'src/app/tables-dynamic/table-data';
 @Component({
   selector: 'app-pedidos',
   template: `
-    <app-table-contenedor
-        [tableData]="tableData"
-    >
 
-    </app-table-contenedor>
   `,
   styleUrls: ['./pedidos.component.css']
 })

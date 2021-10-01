@@ -1,22 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { TableData } from 'src/app/md/md-table/md-table.component';
+import { TableExtendedSimpleComponent } from '../../components/table-extended-simple/table-extended-simple.component';
 
 @Component({
-    exportAs: 'app-table-contenedor',
+
   selector: 'app-table-contenedor',
   template: `<div class="main-content">
-  <div class="container-fluid" appTable>
-
-      <ng-container
-        appTable
-        class="app-table-contenedor"
-
-        *ngFor="let item of tableData"
-        [tableData]="tableData"
-
-      >
-      </ng-container>
-
+  <div class="container-fluid" >
+        <app-table-extended-simple [dataHead]="dataHead">
+        </app-table-extended-simple>
   </div>
 </div>
 `,
@@ -24,13 +16,21 @@ import { TableData } from 'src/app/md/md-table/md-table.component';
 })
 export class TableContenedorComponent implements OnInit {
 
-    @Input()
-    tableData: any;
 
-  constructor() { }
+
+
+    @Input()
+    dataHead: any;
+
+  constructor(private vref:ViewContainerRef) { }
 
   ngOnInit(): void {
-      console.log(this.tableData)
+
+
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
 

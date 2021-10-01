@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { TableData } from 'src/app/md/md-table/md-table.component';
 
 
@@ -6,6 +6,8 @@ import { TableData } from 'src/app/md/md-table/md-table.component';
 @Component({
     selector: 'app-table-extended-simple',
     template: `
+
+
         <div class="card">
             <div class="card-header card-header-rose card-header-icon">
                 <div class="card-icon">
@@ -18,8 +20,7 @@ import { TableData } from 'src/app/md/md-table/md-table.component';
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="text-center" *ngFor="let item of tableData" >{{item.title}}</th>
-
+                                <th class="text-center"  *ngFor="let item of dataHead">{{item.title}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,17 +57,21 @@ import { TableData } from 'src/app/md/md-table/md-table.component';
                 </div>
             </div>
         </div>
+
     `,
     styleUrls: ['./table-extended-simple.component.css'],
 })
 export class TableExtendedSimpleComponent implements OnInit {
 
+
+
+
     @Input()
-    tableData: any;
+    dataHead: [] = [];
 
 
     @Input()
-    table : TableData
+    dataColum: any
 
     constructor() {}
 

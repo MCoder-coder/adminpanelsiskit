@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { EventosOptionsFieldService } from 'src/app/core/services/eventos-options-field.service';
 import { EventosService } from 'src/app/core/services/eventos.service';
@@ -19,11 +19,13 @@ export class EventosComponent implements OnInit {
     fieldConfig : FieldConfig [] = []
     rowConfig : RowConfig  [] =  []
 
-
+    datahead
     tableData: any;
 
 
-    constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService) {}
+    @ViewChild('sayHelloTemplate', { read: TemplateRef , static : true})  sayHelloTemplate:TemplateRef<any>;
+
+    constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService , private vref:ViewContainerRef) {}
 
     @ViewChild(MatSort) sort: MatSort;
 
@@ -31,7 +33,6 @@ export class EventosComponent implements OnInit {
 
         this.getFormOption()
         this.getEventos()
-
 
     }
 
@@ -52,7 +53,7 @@ export class EventosComponent implements OnInit {
             console.log(responseField)
            // this.tableData.headerRow = responseField
 
-            this.tableData = responseField
+            this.datahead= responseField
             console.log(this.tableData)
         })
     }
