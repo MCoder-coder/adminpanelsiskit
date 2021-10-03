@@ -20,14 +20,14 @@ export class EventosComponent implements OnInit {
     rowConfig : RowConfig  [] =  []
 
     datahead
+    dataColum
     tableData: any;
+    data
+    selectedTemplate
 
-
-    @ViewChild('sayHelloTemplate', { read: TemplateRef , static : true})  sayHelloTemplate:TemplateRef<any>;
 
     constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService , private vref:ViewContainerRef) {}
 
-    @ViewChild(MatSort) sort: MatSort;
 
     ngOnInit(): void {
 
@@ -39,7 +39,7 @@ export class EventosComponent implements OnInit {
     getEventos(){
         this.eventosService.getEventos().subscribe((resEventos : any) => {
 
-           // this.tableData.dataRows = resEventos
+            this.dataColum= resEventos
             console.log(resEventos)
         })
     }
