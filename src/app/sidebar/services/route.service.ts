@@ -36,7 +36,7 @@ export class RouteService {
         return (
             this.http.get<RouteInfo>(`${environment.url_api}v4/app/drawer`).pipe(
                 map(resDrawer =>{
-                    //console.log("drawer" , resDrawer)
+                    console.log("drawer" , resDrawer)
                     return resDrawer
                 })
             )

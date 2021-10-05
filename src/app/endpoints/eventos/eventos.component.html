@@ -10,13 +10,36 @@
                 </ng-container>
                 <ng-container *dataColumItem="let row">
 
-                    <td class="">{{row.ID}}</td>
+                    <td class="text-right">{{row.ID}}</td>
                     <td class="">{{row.nombre}}</td>
                     <td class="">{{row.descripcion}}</td>
                     <td class="">{{row.fecha}}</td>
                     <td class="text-right">
                         <img src="{{ 'https://www.juanschtrefotografo.com/'+ row.imgcaratula}}"
                             alt>
+                    </td>
+                    <td class="td-actions text-right">
+                        <button
+                            mat-raised-button
+                            type="button"
+                            class="btn btn-info "
+                        >
+                            <i class="material-icons">person</i>
+                        </button>
+                        <button
+                            mat-raised-button
+                            type="button"
+                            class="btn btn-success "
+                        >
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button
+                            mat-raised-button
+                            type="button"
+                            class="btn btn-danger "
+                        >
+                            <i class="material-icons">close</i>
+                        </button>
                     </td>
                 </ng-container>
 

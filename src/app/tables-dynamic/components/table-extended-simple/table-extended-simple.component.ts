@@ -32,9 +32,6 @@ import { DataColumItemDirective } from '../../data-column.directive';
                         </thead>
                         <tbody>
                             <tr *ngFor="let row of dataColum">
-                            <td class="text-right">
-
-                            </td>
                             <ng-container *ngTemplateOutlet="dataColumnItemTemplate; context: {$implicit : row}">
                                 </ng-container>
 
@@ -68,8 +65,8 @@ import { DataColumItemDirective } from '../../data-column.directive';
                                                 alt>
                                         </td> -->
 
-                                <td class="text-right"></td>
-                                <td class="td-actions text-right">
+
+                                <!-- <td class="td-actions text-right">
                                     <button
                                         mat-raised-button
                                         type="button"
@@ -91,7 +88,7 @@ import { DataColumItemDirective } from '../../data-column.directive';
                                     >
                                         <i class="material-icons">close</i>
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
