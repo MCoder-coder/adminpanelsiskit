@@ -10,7 +10,17 @@ import { TableData } from 'src/app/tables-dynamic/table-data';
     <div class="main-content">
     <div class="container-fluid" >
 
+    <app-table-extended-simple [dataColum]="dataColum" [dataHead]="datahead">
+    <div *cardItem="let itemrow">
+        {{itemrow}}
 
+	</div>
+    <ng-container *dataColumItem="let row">
+
+{{row}}
+
+        </ng-container>
+    </app-table-extended-simple>
 
 
     </div>

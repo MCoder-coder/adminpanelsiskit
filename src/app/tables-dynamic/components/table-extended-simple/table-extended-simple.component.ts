@@ -1,6 +1,7 @@
 import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { TableData } from 'src/app/md/md-table/md-table.component';
 import { CardItemDirective } from '../../car-item.directive';
+import { DataColumItemDirective } from '../../data-column.directive';
 
 
 
@@ -21,33 +22,23 @@ import { CardItemDirective } from '../../car-item.directive';
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="text-center"  *ngFor="let itemrow of dataHead">
-                                    {{itemrow.title}}
-                                </th>
+                                <ng-container *ngFor="let item of dataHead">
+                                <th class=""> <ng-container *ngTemplateOutlet="cardItemTemplate;
+                                context: {$implicit: item}"></ng-container> </th>
+                                </ng-container>
+
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let row of dataColum | keyvalue">
-                                <ng-template #defaultSelected let-row>
-                                       <td class="text-right">{{row.key}}</td>
-                                       <td class="text-right">{{row.value.nombre}}</td>
-                                        <td class="descripcion">{{row.value.descripcion}}</td>
-                                        <td class="fecha">{{row.value.fecha}}</td>
-                                        <td class="text-right">
-                                            <img src="{{ 'https://www.juanschtrefotografo.com/'+ row.value.imgcaratula}}"
-                                                alt>
-                                        </td>
-                                </ng-template>
-                                        <ng-container
-                                            [ngTemplateOutlet]="selectedTemplateRef || defaultSelected"
-                                            [ngTemplateOutletContext]="{ $implicit: row, index: i }"
+                            <tr *ngFor="let row of dataColum">
+                            <td class="text-right">
 
-                                        >
-                                        </ng-container>
+                            </td>
+                            <ng-container *ngTemplateOutlet="dataColumnItemTemplate; context: {$implicit : row}">
+                                </ng-container>
 
-                                      <ng-template #defaultOption let-row >
-                                            <td class="text-right">{{row}}</td>
-                                        </ng-template>
+
 
                                         <!-- <ng-container
                                             [ngTemplateOutlet]="optionTemplateRef || defaultOption"
@@ -55,6 +46,17 @@ import { CardItemDirective } from '../../car-item.directive';
                                         >
                                             {{row}}
                                         </ng-container> -->
+
+                                        <!--
+                                              <td class="text-right">{{row.key}}</td>
+                                       <td class="text-right">{{row.value.nombre}}</td>
+                                        <td class="descripcion">{{row.value.descripcion}}</td>
+                                        <td class="fecha">{{row.value.fecha}}</td>
+                                        <td class="text-right">
+                                            <img src="{{ 'https://www.juanschtrefotografo.com/'+ row.value.imgcaratula}}"
+                                                alt>
+                                        </td>
+                                         -->
 
 
                             <!-- <td class="text-right">{{row.key}}</td>
@@ -103,8 +105,10 @@ import { CardItemDirective } from '../../car-item.directive';
 export class TableExtendedSimpleComponent implements OnInit {
 
 
-    @ContentChild(CardItemDirective, {read: TemplateRef}) cardItemTemplate;
 
+    @ContentChild(CardItemDirective, {read: TemplateRef}) cardItemTemplate: any;
+
+    @ContentChild(DataColumItemDirective, {read: TemplateRef}) dataColumnItemTemplate: any;
     @Input()
     dataHead: [] = [];
     @Input()
