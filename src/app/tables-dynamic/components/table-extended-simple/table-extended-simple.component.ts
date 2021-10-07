@@ -23,8 +23,8 @@ import { DataColumItemDirective } from '../../data-column.directive';
                         <thead>
                             <tr>
                                 <ng-container *ngFor="let item of dataHead">
-                                <th class=""> <ng-container *ngTemplateOutlet="cardItemTemplate;
-                                context: {$implicit: item}"></ng-container> </th>
+                                <ng-container *ngTemplateOutlet="cardItemTemplate;
+                                context: {$implicit: item}"></ng-container>
                                 </ng-container>
 
 

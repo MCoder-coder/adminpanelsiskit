@@ -6,7 +6,8 @@
     <div class="container-fluid" >
           <app-table-extended-simple [dataColum]="dataColum" [dataHead]="datahead" >
                 <ng-container *cardItem="let item">
-                    {{item.title}}
+                    <th class="text-right"> {{item.title}}</th>
+
                 </ng-container>
                 <ng-container *dataColumItem="let row">
 
@@ -24,14 +25,14 @@
                             type="button"
                             class="btn btn-info "
                         >
-                            <i class="material-icons">person</i>
+                            <i class="material-icons"></i>
                         </button>
                         <button
                             mat-raised-button
                             type="button"
                             class="btn btn-success "
                         >
-                            <i class="material-icons">edit</i>
+                            <i class="material-icons" (click)="editClickFormTest(row.ID)">edit</i>
                         </button>
                         <button
                             mat-raised-button

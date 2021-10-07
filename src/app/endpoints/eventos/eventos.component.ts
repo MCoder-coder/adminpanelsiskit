@@ -57,4 +57,8 @@ export class EventosComponent implements OnInit {
             console.log(this.tableData)
         })
     }
+
+    editClickFormTest(id : any){
+        console.log("click" , id)
+    }
 }
