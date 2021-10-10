@@ -17,7 +17,7 @@ import { TableData } from 'src/app/tables-dynamic/table-data';
 	</div>
     <ng-container *dataColumItem="let row">
 
-{{row}}
+        {{row}}
 
         </ng-container>
     </app-table-extended-simple>
@@ -25,6 +25,8 @@ import { TableData } from 'src/app/tables-dynamic/table-data';
 
     </div>
   </div>
+  <app-table-list></app-table-list>
+
   `,
   styleUrls: ['./pedidos.component.css']
 })

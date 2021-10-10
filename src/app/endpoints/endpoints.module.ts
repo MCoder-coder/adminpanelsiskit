@@ -13,6 +13,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { TagInputModule } from 'ngx-chips';
 import { TablesModule } from '../tables/tables.module';
 import { TablesDynamicModule } from '../tables-dynamic/tables-dynamic.module';
+import { TableListModule } from '../table-list/table-list.module';
 
 
 
@@ -28,7 +29,8 @@ import { TablesDynamicModule } from '../tables-dynamic/tables-dynamic.module';
     NouisliderModule,
     TagInputModule,
     MaterialModule,
-    TablesDynamicModule
+    TablesDynamicModule,
+    TableListModule
   ],
 
 })

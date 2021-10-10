@@ -1,0 +1,12 @@
+<div class="albumlist-container">
+    <div class="format-selector">
+      <button type="button"
+         (click)="onChangeAlbumDisplayClick('list')">List</button>
+      <button type="button"
+         (click)="onChangeAlbumDisplayClick('covers')">Covers</button>
+    </div>
+    <div>
+        <app-base-list [showContentStyle]="currentStyle"
+        [albumList]="albumList" ></app-base-list>
+    </div>
+  </div>

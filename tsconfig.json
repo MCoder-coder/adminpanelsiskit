@@ -12,6 +12,7 @@
     "experimentalDecorators": true,
     "target": "es5",
     "types": [
+    "jasmine",
       "node"
     ],
     "typeRoots": [
