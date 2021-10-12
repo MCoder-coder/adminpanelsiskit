@@ -16,7 +16,7 @@ export abstract class AbstractList {
 export class TableListComponent implements OnInit {
 
 
-    public currentStyle = '';
+    public currentStyle = 'covers';
     public albumList: [] = [];
     contentStyles: any;
 

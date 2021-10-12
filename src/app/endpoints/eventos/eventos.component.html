@@ -1,10 +1,17 @@
 
 
+<!-- <div class="main-content">
+    <div class="container-fluid">
+        <button class="btn" (click)="back()">Back</button>
+        <app-base-components-dynamic  [config]="config">
+        </app-base-components-dynamic>
+    </div>
+</div> -->
 
-
-`<div class="main-content">
+<div class="main-content" >
     <div class="container-fluid" >
-          <app-table-extended-simple [dataColum]="dataColum" [dataHead]="datahead" >
+        <button class="btn" (click)="back()">Back</button>
+          <app-table-extended-simple [dataColum]="dataColum" [dataHead]="datahead"  *ngIf="currentStyle != 'form'">
                 <ng-container *cardItem="let item">
                     <th class="text-right"> {{item.title}}</th>
 
@@ -26,7 +33,7 @@
                             type="button"
                             class="btn btn-success "
                         >
-                            <i class="material-icons" (click)="editClickFormTest(row.ID)">edit</i>
+                            <i class="material-icons"  (click)="editClickFormTest(row.ID)">edit</i>
                         </button>
                         <button
                             mat-raised-button
@@ -39,6 +46,10 @@
                 </ng-container>
 
           </app-table-extended-simple>
-
+          <app-base-components-dynamic *ngIf="currentStyle"[ShowcomponentStyle]="currentStyle" [config]="config">
+        </app-base-components-dynamic>
     </div>
   </div>
+
+
+

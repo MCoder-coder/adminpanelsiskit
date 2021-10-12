@@ -14,6 +14,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TablesModule } from '../tables/tables.module';
 import { TablesDynamicModule } from '../tables-dynamic/tables-dynamic.module';
 import { TableListModule } from '../table-list/table-list.module';
+import { DynamicComponenetsModule } from '../dynamic-componenets/dynamic-componenets.module';
 
 
 
@@ -24,13 +25,15 @@ import { TableListModule } from '../table-list/table-list.module';
     EndpointsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    DynamicFormModule,
+
     FormsModule,
     NouisliderModule,
     TagInputModule,
     MaterialModule,
     TablesDynamicModule,
-    TableListModule
+    TableListModule,
+
+    DynamicComponenetsModule
   ],
 
 })

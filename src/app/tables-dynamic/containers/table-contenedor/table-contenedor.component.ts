@@ -5,13 +5,7 @@ import { TableExtendedSimpleComponent } from '../../components/table-extended-si
 @Component({
 
   selector: 'app-table-contenedor',
-  template: `<div class="main-content">
-  <div class="container-fluid" >
-        <app-table-extended-simple [dataHead]="dataHead">
-        </app-table-extended-simple>
-  </div>
-</div>
-`,
+  templateUrl: './table-contenedor.component.html',
   styleUrls: ['./table-contenedor.component.css']
 })
 export class TableContenedorComponent implements OnInit {

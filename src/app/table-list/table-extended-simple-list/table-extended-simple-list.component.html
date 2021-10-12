@@ -1,3 +1,90 @@
 
 
   <h1>templeta2</h1>
+
+  <div class="card">
+    <div class="card-header card-header-rose card-header-icon">
+        <div class="card-icon">
+            <i class="material-icons">assignment</i>
+        </div>
+        <h4 class="card-title">Simple Table</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- <ng-container *ngFor="let item of dataHead">
+                        <ng-container *ngTemplateOutlet="cardItemTemplate;
+                        context: {$implicit: item}"></ng-container>
+                        </ng-container> -->
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <!-- <tr *ngFor="let row of dataColum">
+                    <ng-container *ngTemplateOutlet="dataColumnItemTemplate; context: {$implicit : row}">
+                        </ng-container> -->
+
+
+
+                                <!-- <ng-container
+                                    [ngTemplateOutlet]="optionTemplateRef || defaultOption"
+                                    [ngTemplateOutletContext]="{ $implicit: row, index: i }"
+                                >
+                                    {{row}}
+                                </ng-container> -->
+
+                                <!--
+                                      <td class="text-right">{{row.key}}</td>
+                               <td class="text-right">{{row.value.nombre}}</td>
+                                <td class="descripcion">{{row.value.descripcion}}</td>
+                                <td class="fecha">{{row.value.fecha}}</td>
+                                <td class="text-right">
+                                    <img src="{{ 'https://www.juanschtrefotografo.com/'+ row.value.imgcaratula}}"
+                                        alt>
+                                </td>
+                                 -->
+
+
+                    <!-- <td class="text-right">{{row.key}}</td>
+                                <td class="text-right">{{row.value.nombre}}</td>
+                                <td class="descripcion">{{row.value.descripcion}}</td>
+                                <td class="fecha">{{row.value.fecha}}</td>
+                                <td class="text-right">
+                                    <img src="{{ 'https://www.juanschtrefotografo.com/'+ row.value.imgcaratula}}"
+                                        alt>
+                                </td> -->
+
+
+                       <td class="td-actions text-right">
+                            <button
+                                mat-raised-button
+                                type="button"
+                                class="btn btn-info "
+                            >
+                                <i class="material-icons">person</i>
+                            </button>
+                            <button
+                                mat-raised-button
+                                type="button"
+                                class="btn btn-success "
+                            >
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button
+                                mat-raised-button
+                                type="button"
+                                class="btn btn-danger "
+                            >
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

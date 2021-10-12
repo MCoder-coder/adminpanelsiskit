@@ -9,12 +9,17 @@ import { FieldConfig } from 'src/app/dynamic-form/models/field-config.interface'
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Validators } from '@angular/forms';
+import { TableExtendedSimpleComponent } from 'src/app/tables-dynamic/components/table-extended-simple/table-extended-simple.component';
+import { TableSimpleComponent } from 'src/app/dynamic-componenets/table-simple/table-simple.component';
 @Component({
     selector: 'app-eventos',
     templateUrl: 'eventos.component.html',
     styleUrls: ['./eventos.component.css'],
 })
 export class EventosComponent implements OnInit {
+
+    @ViewChild(TableSimpleComponent) table: TableSimpleComponent;
 
     fieldConfig : FieldConfig [] = []
     rowConfig : RowConfig  [] =  []
@@ -24,16 +29,20 @@ export class EventosComponent implements OnInit {
     tableData: any;
     data
     selectedTemplate
-
-
+    config
+    currentStyle
     constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService , private vref:ViewContainerRef) {}
 
+    ngOnChanges(): void {
+        //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+        //Add '${implements OnChanges}' to the class.
+
+    }
 
     ngOnInit(): void {
 
         this.getFormOption()
         this.getEventos()
-
     }
 
     getEventos(){
@@ -45,6 +54,12 @@ export class EventosComponent implements OnInit {
     }
 
 
+    ngAfterViewInit(): void {
+        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+        //Add 'implements AfterViewInit' to the class.
+
+    }
+
     getFormOption(){
 
         this.eventosFieldOptionService.getFieldOption().subscribe(responseField =>{
@@ -54,11 +69,28 @@ export class EventosComponent implements OnInit {
            // this.tableData.headerRow = responseField
 
             this.datahead= responseField
+            this.config = responseField as FieldConfig[]
             console.log(this.tableData)
+            this.config.filter((fieldFilter: any) => {
+
+                fieldFilter.validation = [Validators.required ]
+
+               // fieldFilter.validation = [Validators.required]
+                //this.form.ge
+              //  this.fieldNoValid(fieldFilter.name)
+               console.log("filter" ,fieldFilter  )
+            })
         })
     }
 
     editClickFormTest(id : any){
+
+        this.currentStyle = "form"
         console.log("click" , id)
+    }
+
+
+    back(){
+        this.currentStyle = localStorage.removeItem("estilo")
     }
 }
