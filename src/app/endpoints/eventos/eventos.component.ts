@@ -31,7 +31,9 @@ export class EventosComponent implements OnInit {
     selectedTemplate
     config
     currentStyle
-    constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService , private vref:ViewContainerRef) {}
+    constructor(private eventosService : EventosService , private eventosFieldOptionService : EventosOptionsFieldService , private vref:ViewContainerRef) {
+
+    }
 
     ngOnChanges(): void {
         //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
@@ -40,9 +42,9 @@ export class EventosComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
         this.getFormOption()
         this.getEventos()
+        this.currentStyle = "table"
     }
 
     getEventos(){
@@ -84,7 +86,6 @@ export class EventosComponent implements OnInit {
     }
 
     editClickFormTest(id : any){
-
         this.currentStyle = "form"
         console.log("click" , id)
     }

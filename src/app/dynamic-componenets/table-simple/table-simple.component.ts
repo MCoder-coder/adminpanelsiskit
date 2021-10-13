@@ -16,9 +16,9 @@ export abstract class DataList {
 })
 export class TableSimpleComponent implements OnInit {
 
-     currentStyle
-    dataHead
-    dataColum
+    currentStyle
+    @Input() dataHead
+    @Input() dataColum
     constructor() {}
 
     ngOnInit(): void {

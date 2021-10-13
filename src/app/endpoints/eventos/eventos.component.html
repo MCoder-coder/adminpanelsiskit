@@ -1,14 +1,14 @@
 
 
-<!-- <div class="main-content">
+ <div class="main-content">
     <div class="container-fluid">
         <button class="btn" (click)="back()">Back</button>
-        <app-base-components-dynamic  [config]="config">
+        <app-base-components-dynamic  [config]="config" [ShowcomponentStyle]="table" [dataColum]="this.dataColum" [dataHead]="this.datahead">
         </app-base-components-dynamic>
     </div>
-</div> -->
+</div>
 
-<div class="main-content" >
+<!-- <div class="main-content" >
     <div class="container-fluid" >
         <button class="btn" (click)="back()">Back</button>
           <app-table-extended-simple [dataColum]="dataColum" [dataHead]="datahead"  *ngIf="currentStyle != 'form'">
@@ -46,10 +46,10 @@
                 </ng-container>
 
           </app-table-extended-simple>
-          <app-base-components-dynamic *ngIf="currentStyle"[ShowcomponentStyle]="currentStyle" [config]="config">
+          <app-base-components-dynamic *ngIf="currentStyle" [ShowcomponentStyle]="currentStyle" [config]="config">
         </app-base-components-dynamic>
     </div>
-  </div>
+  </div> -->
 
 
 

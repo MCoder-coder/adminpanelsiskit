@@ -19,7 +19,9 @@
                           <tbody>
                               <tr *ngFor="let item of dataColum">
                                   <td class="">{{item.ID}}</td>
-                                  <td>{{item.nombre}}</td>
+                                  <td>
+                                      a <app-textbox [fieldStyle]="list" [config]="config"></app-textbox>
+                                    </td>
 
 
                                   <td class=""></td>

@@ -18,8 +18,8 @@ export class BaseComponentsDynamicComponent implements OnInit {
     componentStyleContainer: ViewContainerRef;
 
     @Input() ShowcomponentStyle: string;
-    @Input() dataHead: [] = [];
-    @Input() dataColum: [] = [];
+    @Input() dataHead;
+    @Input() dataColum;
     @Input()
     config : any
 
@@ -41,6 +41,7 @@ export class BaseComponentsDynamicComponent implements OnInit {
             this.componentStyleContainer.createComponent(factoryInstance);
         const inst = this.componentReference.instance as DataList;
         console.log(inst);
+
         inst.dataHead = this.dataHead;
         inst.dataColum = this.dataColum;
         inst.config = this.config
@@ -48,12 +49,12 @@ export class BaseComponentsDynamicComponent implements OnInit {
 
 
     private provideListComponent(componentStyle: string) {
-        return this.contentcomponentStyles[componentStyle] || this.contentcomponentStyles.form;
+        return this.contentcomponentStyles[componentStyle] || this.contentcomponentStyles.table;
     }
 
     ngOnInit(): void {
 
-       // this.instantiateViewComponent(this.ShowcomponentStyle);
+       this.instantiateViewComponent(this.ShowcomponentStyle);
     }
 
 
@@ -66,7 +67,7 @@ export class BaseComponentsDynamicComponent implements OnInit {
         console.log("destroy")
         this.destroyChildComponent();
         this.instantiateViewComponent(this.ShowcomponentStyle);
-      //  this.instantiateViewComponent(localStorage.getItem("estilo"));
+        this.instantiateViewComponent(localStorage.getItem("estilo"));
     }
 
     private destroyChildComponent() {
