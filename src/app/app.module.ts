@@ -37,17 +37,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { SidebarModule } from './views/sidebar/sidebar.module';
+import { NavbarModule } from './views/shared/navbar/navbar.module';
+import { FixedpluginModule } from './views/shared/fixedplugin/fixedplugin.module';
+import { AdminLayoutComponent } from './views/layouts/admin/admin-layout.component';
 import { AppComponent } from './app.component';
-
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-
+import { AuthLayoutComponent } from './views/layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
+
+
+
+
+
 
 @NgModule({
   exports: [
@@ -94,11 +95,10 @@ export class MaterialModule {}
           useHash: true
         }),
         HttpClientModule,
-
         MaterialModule,
         SidebarModule,
         NavbarModule,
-        FooterModule,
+        RouterModule,
         FixedpluginModule
     ],
     declarations: [
